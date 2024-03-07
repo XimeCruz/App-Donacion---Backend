@@ -9,4 +9,5 @@ public class Receptor {
     @Id
     @Column(name = "id", nullable = false)
     private long idUSer;  // hay que modificar XD ya que es herencia xd
+    
 }
