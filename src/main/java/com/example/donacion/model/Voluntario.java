@@ -1,2 +1,5 @@
-package com.example.donacion.model;public class Voluntario {
+package com.example.donacion.model;
+
+public class Voluntario {
+
 }
