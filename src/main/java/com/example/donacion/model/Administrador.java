@@ -1,22 +1,20 @@
 package com.example.donacion.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
+@Table
 @Entity
 public class Administrador {
     @Id
     @Column(name = "id", nullable = false)
-    private long idUSer;  // hay que modificar XD ya que es herencia xd
-
+    private long id;
     private String ci;
 
-    public String getCi() {
-        return ci;
-    }
 
-    public void setCi(String ci) {
-        this.ci = ci;
-    }
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Usuario usuario;
 }

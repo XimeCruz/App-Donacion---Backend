@@ -4,19 +4,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 @Table
 @Entity
-public class Voluntario {
+public class Voluntario_Donacion {
+
     @Id
     @Column(name = "id", nullable = false)
-    private long id;
-    private int edad;
-    private String horario;
-    private String turno;
-
+    private Long id;
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private Usuario usuario;
+    private Voluntario voluntario;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Donacion donacion;
+
+    private Date fecha;
 }

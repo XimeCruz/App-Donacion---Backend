@@ -1,59 +1,29 @@
 package com.example.donacion.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Date;
 
+@Data
+@Table
 @Entity
 public class Inventario {
     @Id
     @Column(name = "id", nullable = false)
-    private long id_inv;
+    private long id;
     private Date fecha_deshecho;
     private String razon;
     private int cantidad;
 
-    public long getId_inv() {
-        return id_inv;
-    }
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Alimento alimento;
 
-    public void setId_inv(long id_inv) {
-        this.id_inv = id_inv;
-    }
 
-    public Date getFecha_deshecho() {
-        return fecha_deshecho;
-    }
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Producto producto;
 
-    public void setFecha_deshecho(Date fecha_deshecho) {
-        this.fecha_deshecho = fecha_deshecho;
-    }
-
-    public String getRazon() {
-        return razon;
-    }
-
-    public void setRazon(String razon) {
-        this.razon = razon;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    @Override
-    public String toString() {
-        return "Inventario{" +
-                "id_inv=" + id_inv +
-                ", fecha_deshecho=" + fecha_deshecho +
-                ", razon='" + razon + '\'' +
-                ", cantidad=" + cantidad +
-                '}';
-    }
 }

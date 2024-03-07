@@ -1,13 +1,26 @@
 package com.example.donacion.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
+@Table
 @Entity
 public class Receptor {
     @Id
     @Column(name = "id", nullable = false)
-    private long idUSer;  // hay que modificar XD ya que es herencia xd
+    private long id;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Usuario usuario;
+
+//    @OneToOne
+//    @JoinColumn(name = "organizacion_id")
+//    private Organizacion organizacion;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "receptor")
+    private Organizacion organizacion;
     
 }
