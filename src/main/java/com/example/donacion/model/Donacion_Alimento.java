@@ -2,11 +2,9 @@ package com.example.donacion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.util.Date;
 
-@Data
 @Table
 @Entity
 public class Donacion_Alimento {
@@ -23,4 +21,36 @@ public class Donacion_Alimento {
     private Alimento alimento;
 
     private Date fecha;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Donacion getDonacion() {
+        return donacion;
+    }
+
+    public void setDonacion(Donacion donacion) {
+        this.donacion = donacion;
+    }
+
+    public Alimento getAlimento() {
+        return alimento;
+    }
+
+    public void setAlimento(Alimento alimento) {
+        this.alimento = alimento;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 }

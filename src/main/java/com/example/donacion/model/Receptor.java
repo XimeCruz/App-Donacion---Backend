@@ -2,9 +2,7 @@ package com.example.donacion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
 
-@Data
 @Table
 @Entity
 public class Receptor {
@@ -14,7 +12,7 @@ public class Receptor {
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private Usuario usuario;
+    private User usuario;
 
 //    @OneToOne
 //    @JoinColumn(name = "organizacion_id")
@@ -22,5 +20,29 @@ public class Receptor {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "receptor")
     private Organizacion organizacion;
-    
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
+
+    public Organizacion getOrganizacion() {
+        return organizacion;
+    }
+
+    public void setOrganizacion(Organizacion organizacion) {
+        this.organizacion = organizacion;
+    }
 }
