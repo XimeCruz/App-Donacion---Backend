@@ -1,5 +1,6 @@
 package com.example.donacion.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -46,4 +47,10 @@ public class Solicitud {
     public void setHora_prog(String hora_prog) {
         this.hora_prog = hora_prog;
     }
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private User user;
+
+
 }

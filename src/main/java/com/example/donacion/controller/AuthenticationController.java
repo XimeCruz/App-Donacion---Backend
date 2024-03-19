@@ -1,12 +1,18 @@
 package com.example.donacion.controller;
 
+import com.example.donacion.model.User;
 import com.example.donacion.model.request.AuthenticationRequest;
+import com.example.donacion.model.request.SignupRequest;
 import com.example.donacion.model.response.AuthenticationResponse;
+import com.example.donacion.model.response.MessageResponse;
+import com.example.donacion.repository.UserRepository;
 import com.example.donacion.service.AuthenticationService;
+import com.example.donacion.util.Role;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +22,15 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
+
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public AuthenticationController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @PreAuthorize("permitAll")
     @PostMapping("/authenticate")
@@ -70,42 +85,37 @@ public class AuthenticationController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
 
-        Set<String> strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
+        String strRol = signUpRequest.getRole();
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
+        Role userRole = Role.CUSTOMER;
 
-                        break;
-                    case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
+        switch (strRol) {
+            case "admin":
+                userRole = Role.ADMINISTRATOR;
+                break;
+            case "ben":
+                userRole = Role.BENEFICIARIO;
+                break;
+            case "don":
+                userRole = Role.DONANTE;
+                break;
+            case "vol":
+                userRole = Role.VOLUNTARIO;
+                break;
         }
 
-        user.setRoles(roles);
+
+        // Create new user's account
+        User user = new User(signUpRequest.getUsername(),
+                signUpRequest.getName(),
+                passwordEncoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getDirection(),
+                signUpRequest.getEmail(),
+                signUpRequest.getPhone(),
+                userRole
+        );
+
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

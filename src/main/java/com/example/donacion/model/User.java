@@ -1,7 +1,6 @@
 package com.example.donacion.model;
 
 import com.example.donacion.util.Role;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,14 +26,27 @@ public class User implements UserDetails {
 
     private String ubicacion;
 
-    private String correo;
+    private String email;
 
-    private String telefono;
+    private Integer telefono;
 
-    private String tipo;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User(String username, String name, String password, String ubicacion, String email, Integer telefono, Role role) {
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.ubicacion = ubicacion;
+        this.email = email;
+        this.telefono = telefono;
+        this.role = role;
+    }
+
+    public User() {
+
+    }
 
     public Long getId() {
         return id;
@@ -108,28 +120,20 @@ public class User implements UserDetails {
         this.ubicacion = ubicacion;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public Role getRole() {
@@ -139,32 +143,5 @@ public class User implements UserDetails {
     public void setRole(Role role) {
         this.role = role;
     }
-
-    public Donacion getDonacion() {
-        return donacion;
-    }
-
-    public void setDonacion(Donacion donacion) {
-        this.donacion = donacion;
-    }
-
-    public Solicitud getSolicitud() {
-        return solicitud;
-    }
-
-    public void setSolicitud(Solicitud solicitud) {
-        this.solicitud = solicitud;
-    }
-
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private Donacion donacion;
-
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private Solicitud solicitud;
-
-
-
 
 }

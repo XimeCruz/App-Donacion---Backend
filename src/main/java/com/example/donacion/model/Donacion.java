@@ -1,9 +1,7 @@
 package com.example.donacion.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -48,4 +46,10 @@ public class Donacion {
     public void setHora_adquisicion(String hora_adquisicion) {
         this.hora_adquisicion = hora_adquisicion;
     }
+
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private User user;
+
 }
