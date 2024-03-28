@@ -5,6 +5,8 @@ import com.example.donacion.model.request.AuthenticationRequest;
 import com.example.donacion.model.response.AuthenticationResponse;
 import com.example.donacion.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -40,11 +42,23 @@ public class AuthenticationService {
         //User user = userRepository.findByUsername(authRequest.getUsername()).get();
 
         //se manda el objeto y los claims
+        //crear el body
         String jwt = jwtService.generateToken(user, generateExtraClaims(user));
+        AuthenticationResponse.Body bodyRes = new AuthenticationResponse.Body();
+        bodyRes.setAccessToken(jwt);
+        bodyRes.setRefreshToken(jwt);
+
+        AuthenticationResponse.User userRes = new AuthenticationResponse.User();
+        userRes.setUsername(user.getUsername());
+        userRes.setName(user.getName());
+        userRes.setId(String.valueOf(user.getId()));
+
+        bodyRes.setUser(userRes);
+
 
         //claims data en https://jwt.io/
 
-        return new AuthenticationResponse(jwt);
+        return new AuthenticationResponse(HttpStatus.OK.value(),bodyRes);
     }
 
     private Map<String, Object> generateExtraClaims(User user) {
