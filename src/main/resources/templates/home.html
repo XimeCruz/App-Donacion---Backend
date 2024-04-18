@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Landing Page</title>
+    <title>Landing Page Donacion</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-9pJ/CLNHCxJmK8er7I6/WmftH4DHt3iyZWyQNHp+hYtGPV8dIJK/7TCdf+6meQH6cG9nm8gFg5xE1lNsjSctWg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 <div class="App">
@@ -57,15 +59,160 @@
         </div>
       </div>
     </div>
-   
 
-    <section id="main-content">
-        <p>¡Aquí puedes agregar tu contenido principal!</p>
-    </section>
+    <div class="about-section-container">
+      <div class="about-background-image-container">
+        <img th:src="@{/images/about-background.png}" />
+      </div>
+      <div class="about-section-image-container">
+        <img th:src="@{/images/about-background-image.png}" />
+      </div>
+      <div class="about-section-text-container">
+        <p class="primary-subheading">Sobre Nosotros</p>
+        <h1 class="primary-heading">
+          Food For EveryBody
+        </h1>
+        <p class="primary-text">
+        Bienvenido a Food for EveryBody, el punto de encuentro donde convergen la generosidad, 
+        la solidaridad y la esperanza. En nuestro compromiso constante por construir un mundo más 
+        equitativo, hemos creado esta plataforma para conectar a donantes compasivos, voluntarios 
+        entregados y aquellos que buscan apoyo alimentario. 
+        </p>
+        <p class="primary-text">
+        En el corazón de Food for EveryBody 
+        yace la convicción de que cada alimento compartido es una semilla de cambio. Nos esforzamos 
+        por simplificar el proceso de donación y recolección, tejiendo así una red de apoyo que abraza 
+        a comunidades enteras. Únete a nosotros en este viaje, donde cada pequeño acto de generosidad 
+        es una poderosa contribución hacia un mañana más lleno de esperanza y abundancia.
+        </p>
+        <div class="about-buttons-container">
+          <button class="secondary-button">Mas</button>
+          <button class="watch-video-button">
+            <BsFillPlayCircleFill /> Ver video
+          </button>
+        </div>
+      </div>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 Tu Empresa</p>
-    </footer>
+    <div class="work-section-wrapper">
+      <div class="work-section-top">
+        <p class="primary-subheading">Trabajo</p>
+        <h1 class="primary-heading">¿Como trabajamos?</h1>
+        <p class="primary-text">
+        En Food for EveryBody, transformamos la generosidad en acción significativa. Nuestra plataforma sirve como un puente vital entre 
+        donantes altruistas y organizaciones benéficas dedicadas, facilitando un proceso fluido de donación y distribución de alimentos. 
+        Los donantes encuentran en nosotros una vía para impactar directamente en sus comunidades, mientras que los voluntarios hallan 
+        oportunidades significativas para poner en práctica su deseo de ayudar. Las organizaciones beneficiadas, a su vez, reciben un 
+        flujo constante de recursos esenciales, permitiéndoles ampliar su impacto y llegar a aquellos que más lo necesitan. En Food for 
+        EveryBody, cada contribución, ya sea en forma de alimentos, tiempo o recursos, se traduce en un acto tangible de solidaridad que 
+        deja una huella duradera en las vidas de aquellos que servimos. Únete a nosotros y sé parte de esta cadena de apoyo que nutre a 
+        comunidades enteras y crea un cambio duradero.
+        </p>
+      </div>
+      <div class="work-section-bottom">
+          <div class="work-section-info">
+            <div class="info-boxes-img-container">
+              <img th:src="@{/images/pick-meals-image.png}" />
+            </div>
+            <h2>Donante</h2>
+            <p>Dona alimentos de cualquier categoria en buen estado con fecha de vencimiento</p>
+          </div>
+          <div class="work-section-info">
+            <div class="info-boxes-img-container">
+              <img th:src="@{/images/choose-image.png}" />
+            </div>
+            <h2>Beneficiario</h2>
+            <p>Selecciona las donaciones que puedan servirle a su organizacion</p>
+          </div>
+          <div class="work-section-info">
+            <div class="info-boxes-img-container">
+              <img th:src="@{/images/delivery-image.png}" />
+            </div>
+            <h2>Voluntario</h2>
+            <p>El voluntario se encuentra con el donante, y lleva la donación hasta el establecimiento de la orgnizacion beneficiada</p>
+          </div>
+      </div>
+    </div>
+
+    <div class="work-section-wrapper">
+      <div class="work-section-top">
+        <p class="primary-subheading">Empresas Aliadas</p>
+        <h1 class="primary-heading-black">Conoce a quienes nos ayudan</h1>
+        <p class="primary-text">
+        En Food for EveryBody, extendemos nuestro más sincero agradecimiento a nuestras empresas aliadas. Gracias por ser catalizadores esenciales en nuestra misión compartida de luchar contra la inseguridad alimentaria. Su apoyo constante y generoso nos permite hacer una diferencia significativa en las vidas de aquellos que más lo necesitan. Juntos, estamos construyendo un futuro más justo y alimentando la esperanza en nuestras comunidades. ¡Gracias por ser parte fundamental de este viaje solidario!
+        </p>
+      </div>
+      <div class="testimonial-section-bottom">
+        <img th:src="@{/images/1.jpg}" />
+        <p>
+        Distribuidora de Pollos Hilda, comprometidos con la calidad desde el primer pío. Nos enorgullece ofrecer pollos frescos y cuidadosamente seleccionados, llevando lo mejor a su mesa. Con décadas de experiencia en la cría y distribución avícola, en Hilda garantizamos cada bocado con estándares excepcionales. Nuestra misión es llevar la excelencia a cada hogar, ofreciendo productos jugosos y nutritivos que deleitan los paladares más exigentes. Descubre la diferencia con Distribuidora de Pollos Hilda: sabor que trasciende.
+        </p>
+        <h2>Distribuidora Pollos "Hilda"</h2>
+      </div>
+      <div class="testimonial-section-bottom">
+        <img th:src="@{/images/2.jpg}" />
+        <p>
+        Distribuidora de Alimentos Buena Granja, cultivando sabor y nutrición para su bienestar. En Buena Granja, nos dedicamos a proporcionar alimentos de la más alta calidad, cuidadosamente cosechados y seleccionados para brindar una experiencia culinaria excepcional. Nuestra pasión por la frescura y la sostenibilidad se refleja en cada producto que llevamos a su mesa. Desde productos de la tierra hasta delicias gourmet, en Buena Granja creemos que cada comida debe ser un placer para los sentidos y un impulso para su salud. Descubra la diferencia con Distribuidora de Alimentos Buena Granja: donde la calidad se convierte en tradición.
+        </p>
+        <h2>Distribuidora de alimentos "Buena Granja"</h2>
+      </div>
+      <div class="testimonial-section-bottom">
+        <img th:src="@{/images/3.jpg}" />
+        <p>
+        Distribuidora de Alimentos Secos Nuts, donde la frescura se une a la conveniencia. En Nuts, nos especializamos en llevar hasta usted una variedad de alimentos secos de la más alta calidad. Desde frutos secos y granos hasta mezclas exquisitas, cada producto es seleccionado con esmero para ofrecerle sabor, textura y nutrición incomparables. Nos enorgullece brindar opciones saludables y deliciosas que se adaptan a su estilo de vida activo. En Distribuidora de Alimentos Secos Nuts, elevamos la experiencia de los alimentos secos a nuevas alturas, donde cada bocado es una aventura de sabores y beneficios para la salud.
+        </p>
+        <h2>Distribuidora de alimentos secos "Nuts"</h2>
+      </div>
+    </div>
+
+    <div class="contact-page-wrapper">
+      <h1 class="primary-heading">¿Tienes alguna pregunta?</h1>
+      <h1 class="primary-heading-green">Dejanos ayudarte</h1>
+      <div class="contact-form-container">
+        <input type="text" placeholder="tuEmail@gmail.com" />
+        <button class="secondary-button">Enviar</button>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer-section-one">
+        <div class="footer-logo-container">
+          <img th:src="@{/images/Logo.svg}" />
+        </div>
+        <p>
+           FOOD FOR EVERYBODY
+        </p>
+        <p>
+        Copyright © 2024 Food For EveryBody
+        </p>
+        <p>
+        Todos los derechos reservados
+        </p>
+        <div class="footer-icons">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-facebook social-icons"></i>
+            <i class="fab fa-youtube social-icons"></i>
+            <i class="fab fa-linkedin social-icons"></i>
+        </div>
+      </div>
+      <div class="footer-section-two">
+        <div class="footer-section-columns">
+          <span>Nosotros</span>
+          <span>Empresas aliadas</span>
+          <span>Voluntarios</span>
+          <span>Terminos del servicio</span>
+          <span>Legal</span>
+          <span>Centro de Soporte</span>
+        </div>
+        <div class="footer-section-columns">
+          <span>+591-7583-6165</span>
+          <span>xcruzt@food4everybody.com</span>
+          <span>maldabat@food4everybody.com</span>
+          <span>jtittoq@food4everybody.com</span>
+        </div>
+      </div>
+    </div>
+
 </div>
 
     <script th:src="@{/js/scripts.js}"></script>

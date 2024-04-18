@@ -390,6 +390,11 @@ nav {
     text-align: center;
     max-width: 80%;
   }
+  .social-icons {
+            font-size: 24px; /* Tamaño de los iconos */
+            margin-right: 10px; /* Espacio entre los iconos */
+        }
+
   .home-text-section,
   .about-section-text-container {
     justify-content: center;
