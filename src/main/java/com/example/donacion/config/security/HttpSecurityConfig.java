@@ -48,6 +48,7 @@ public class HttpSecurityConfig {
 
             authConfig.requestMatchers(HttpMethod.POST, "/auth/authenticate").permitAll(); //tipo publico con post
             authConfig.requestMatchers(HttpMethod.GET, "/auth/public-access").permitAll(); //tipo publico con get
+            authConfig.requestMatchers(HttpMethod.POST, "/auth/signup").permitAll(); //tipo publico con get
             authConfig.requestMatchers("/error").permitAll(); //errores por defecto se muestrasn en /error aplica a todos los https
 
             authConfig.requestMatchers(HttpMethod.GET, "/products").hasAuthority(Permission.READ_ALL_PRODUCTS.name()); //tods los que tengan el permiso

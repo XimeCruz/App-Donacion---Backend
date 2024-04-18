@@ -70,7 +70,7 @@ public class AuthenticationController {
 //    }
 //
 
-
+    @PreAuthorize("permitAll")
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
