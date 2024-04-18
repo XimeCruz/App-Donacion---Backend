@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Landing Page</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div class="App">
+    <div class="home-container">
+       <nav>
+            <div class="nav-logo-container">
+                <img th:src="@{/images/Logo.svg}" />
+            </div>
+            <div class="navbar-links-container">
+                <a href="#nosotros">Nosotros</a>
+                <a href="#trabajo">¿Como trabajamos?</a>
+                <a href="#empresas">Empresas aliadas</a>
+                <a href="#contactos">Contacto</a>
+                <button class="primary-button" onClick={handleQuieroAyudar}>
+                    Recibir ayuda
+                </button>
+                <button class="primary-button" onClick={handleRegDon}>
+                    Quiero donar
+                </button>
+
+                </div>
+        </nav>
+      <div class="home-banner-container">
+        <div class="home-bannerImage-container">
+          <img th:src="@{/images/home-banner-background.png}" />
+        </div>
+        <div class="home-text-section">
+          <h1 class="primary-heading">
+            Únete en la lucha contra el hambre
+          </h1>
+          <h1 class="primary-heading-green">
+            ¡Súmate como voluntario hoy mismo!
+          </h1>
+          <p class="primary-text">
+            Cada acción cuenta
+          </p>
+
+          <div class="button-container">
+            <button class="secondary-button" onClick={handleRegistrate}>
+                QUIERO AYUDAR
+            </button>
+
+            <button class="secondary-button" onClick={handleIniciarSesion}>
+                INICIAR SESIÓN
+            </button>
+          </div>
+        </div>
+        <div class="home-image-section">
+          <img th:src="@{/images/home-banner-image.png}" />
+        </div>
+      </div>
+    </div>
+   
+
+    <section id="main-content">
+        <p>¡Aquí puedes agregar tu contenido principal!</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Tu Empresa</p>
+    </footer>
+</div>
+
+    <script th:src="@{/js/scripts.js}"></script>
+</body>
+</html>

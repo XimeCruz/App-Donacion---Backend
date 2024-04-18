@@ -50,12 +50,15 @@ public class HttpSecurityConfig {
             authConfig.requestMatchers(HttpMethod.GET, "/auth/public-access").permitAll(); //tipo publico con get
             authConfig.requestMatchers(HttpMethod.POST, "/auth/signup").permitAll(); //tipo publico con get
             authConfig.requestMatchers("/error").permitAll(); //errores por defecto se muestrasn en /error aplica a todos los https
-
+            authConfig.requestMatchers("/*").permitAll();
             authConfig.requestMatchers(HttpMethod.GET, "/products").hasAuthority(Permission.READ_ALL_PRODUCTS.name()); //tods los que tengan el permiso
             authConfig.requestMatchers(HttpMethod.POST, "/products").hasAuthority(Permission.SAVE_ONE_PRODUCT.name());
             //ambos llaman a la clase usuario y al metodo getAuthorities
-
-            authConfig.anyRequest().denyAll(); //cualquier peticion que no esta mapeada es decir que haymos dicho que se ública o privada se le denegara el acceso
+            authConfig.requestMatchers("/css/**","/images/**","/js/**").permitAll();
+            authConfig.requestMatchers("/donacion/","/donacion/inicio","/donacion/registro")
+				.anonymous();
+            authConfig.anyRequest().permitAll();
+            //authConfig.anyRequest().denyAll(); //cualquier peticion que no esta mapeada es decir que haymos dicho que se ública o privada se le denegara el acceso
         };
     }
 
