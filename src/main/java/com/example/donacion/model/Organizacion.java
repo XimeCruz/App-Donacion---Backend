@@ -14,12 +14,6 @@ public class Organizacion {
     private String tipo_alimento;
     private String area_servicio;
 
-//    @OneToOne(mappedBy = "receptor", cascade = CascadeType.ALL)
-//    private Receptor receptor;
-
-    @OneToOne
-    @JoinColumn(name = "receptor_id")
-    private Receptor receptor;
 
     public long getId() {
         return id;
@@ -69,11 +63,4 @@ public class Organizacion {
         this.area_servicio = area_servicio;
     }
 
-    public Receptor getReceptor() {
-        return receptor;
-    }
-
-    public void setReceptor(Receptor receptor) {
-        this.receptor = receptor;
-    }
 }

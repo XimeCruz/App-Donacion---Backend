@@ -49,7 +49,19 @@ public class Donacion {
 
 
     @ManyToOne
-    @JsonIgnoreProperties("")
-    private User user;
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(name = "organizacion_id")
+    private Organizacion organizacion;
+
+    @ManyToOne
+    @JoinColumn(name = "donante_id")
+    private Usuario donante;
+
+    @ManyToOne
+    @JoinColumn(name = "voluntario_id")
+    private Usuario voluntarioRecojo;
 
 }

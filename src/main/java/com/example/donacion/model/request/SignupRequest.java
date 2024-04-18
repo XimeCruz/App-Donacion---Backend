@@ -1,6 +1,5 @@
 package com.example.donacion.model.request;
 
-import com.example.donacion.util.Schedule;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
@@ -31,9 +30,6 @@ public class SignupRequest {
     private boolean acceptClause;
 
     private Integer phone;
-
-    @Enumerated(EnumType.STRING)
-    private Schedule schedule;
 
     private boolean transport;
 
@@ -137,14 +133,6 @@ public class SignupRequest {
 
     public void setPhone(Integer phone) {
         this.phone = phone;
-    }
-
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
     }
 
     public boolean isTransport() {

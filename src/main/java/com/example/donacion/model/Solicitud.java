@@ -48,9 +48,6 @@ public class Solicitud {
         this.hora_prog = hora_prog;
     }
 
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private User user;
 
 
 }

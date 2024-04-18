@@ -1,0 +1,17 @@
+@charset "ISO-8859-1";
+#exampleInputEmail1{
+	width: 400px
+}
+body{
+background-color: #347836;
+}
+
+.form-control{
+	resize: none;
+}
+.container{
+	align-items: center;
+}
+#errores{
+	display: inline;
+}
