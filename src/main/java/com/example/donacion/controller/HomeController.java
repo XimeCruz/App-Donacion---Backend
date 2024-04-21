@@ -1,7 +1,9 @@
 package com.example.donacion.controller;
 
+import com.example.donacion.model.Donacion;
 import com.example.donacion.model.ProductoStock;
 import com.example.donacion.service.CategoriaService;
+import com.example.donacion.service.DonacionService;
 import com.example.donacion.service.ProductoStockService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/donacion")
@@ -71,9 +76,9 @@ public class HomeController {
 	@GetMapping(value ="/donacion")
 	public String donacion(Model model,Pageable page) {
 
-		Page<ProductoStock> productos =productoStockServices.getProductos(page);
-		model.addAttribute("productos",productos);
-		model.addAttribute("ispageable", true);
+		List<Donacion> donaciones = new ArrayList<>(); // donacionService.findAll();
+		System.out.println(donaciones);
+		model.addAttribute("donaciones", donaciones);
 
 		return "principal/donaciones";
 	}
@@ -122,4 +127,8 @@ public class HomeController {
 
 	@Autowired
 	private CategoriaService categoriaServices;
+
+	@Autowired
+	private DonacionService donacionService;
+
 }

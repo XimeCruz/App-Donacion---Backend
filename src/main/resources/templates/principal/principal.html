@@ -20,23 +20,23 @@
                       filtrar por precio
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" th:href="@{/carritodecompras/productos/buscar/precio(hasta=50000.0)}" >menor a 50.000</a></li>
-                      <li><a class="dropdown-item" th:href="@{/carritodecompras/productos/buscar/precio(desde=50000.0,hasta=100000.0)}">50.000 - 100.000</a></li>
-                      <li><a class="dropdown-item"th:href="@{/carritodecompras/productos/buscar/precio(desde=150000.0,hasta=200000.0)}">150.000 - 200.000</a></li>
-                      <li><a class="dropdown-item" th:href="@{/carritodecompras/productos/buscar/precio(desde=200000.0)}" >mayor a 200.000</a></li>
+                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(hasta=50000.0)}" >menor a 50.000</a></li>
+                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(desde=50000.0,hasta=100000.0)}">50.000 - 100.000</a></li>
+                      <li><a class="dropdown-item"th:href="@{/donacion/productos/buscar/precio(desde=150000.0,hasta=200000.0)}">150.000 - 200.000</a></li>
+                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(desde=200000.0)}" >mayor a 200.000</a></li>
                     </ul>
                   </div>
             </li>
             <li class="nav-item" id="ordenar">
                 <div id="por-precio" class="dropdown">
                     <button class="btn btn-outline-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      ordenar productos
+                      ordenar donaciones
                     </button>
                     <ul class="dropdown-menu" >
-                      <li><a class="dropdown-item " th:href="@{/carritodecompras/productos(orden='fecha_ASC')}">por fecha de publicación</a></li>
-                      <li><a class="dropdown-item" th:href="@{/carritodecompras/productos(orden='precio_ASC')}">de menor a mayor precio</a></li>
-                      <li><a class="dropdown-item" th:href="@{/carritodecompras/productos(orden='precio_DESC')}">de mayor a menor precio</a></li>
-                      <li><a class="dropdown-item" th:href="@{/carritodecompras/productos(orden='cantidad_disponible_DESC')}">por unidades disponible</a></li>
+                      <li><a class="dropdown-item " th:href="@{/donacion/productos(orden='fecha_ASC')}">por fecha de publicación</a></li>
+                      <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='precio_ASC')}">de menor a mayor precio</a></li>
+                      <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='precio_DESC')}">de mayor a menor precio</a></li>
+                      <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='cantidad_disponible_DESC')}">por unidades disponible</a></li>
                     </ul>
                   </div>
             </li>
@@ -59,13 +59,14 @@
                               
                                 <div class="card-body">
                                     <h5 class="card-title" id="nombre-producto" th:text="${producto.nombre}"></h5>
-                                    <h5 class="card-title" th:text="'$ '+${producto.precio}"></h5>  
-                                    
+                                    <!--h5 class="card-title" th:text="'Bs. '+${producto.precio}"></h5-->
+                                    <h5 class="card-title" th:text="'Categoria: '+${producto.categoria.getNombre()}"></h5>
+
                                     <div>
                                         <a th:href="@{/donacion/beneficiario/producto/{id}/informacion(id=${producto.id})}"  id="btn-card"   class="btn btn-outline-secondary rounded-pill">Informacion</a>
                                     </div>
                                     <div>
-                                        <a th:href="@{/carritodecompras/cliente/producto/agregar/{id} (id=${producto.id})}" id="btn-card2" class="btn btn-outline-primary rounded-pill">Agregar al carrito</a>
+                                        <a th:href="@{/donacion/cliente/producto/agregar/{id} (id=${producto.id})}" id="btn-card2" class="btn btn-outline-primary rounded-pill">Agregar al carrito de donacion</a>
                                     </div>
   
                                 </div>

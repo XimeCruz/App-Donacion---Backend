@@ -50,7 +50,7 @@ public class Donacion {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    private Producto producto;
+    private ProductoStock producto;
 
     @ManyToOne
     @JoinColumn(name = "organizacion_id")

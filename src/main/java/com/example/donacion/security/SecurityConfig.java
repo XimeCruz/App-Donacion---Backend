@@ -19,7 +19,7 @@ public class SecurityConfig {
 		httpSecurity.authorizeHttpRequests(http ->http
 				.requestMatchers("/css/**","/images/**","/js/**")
 				.permitAll()
-				.requestMatchers("/donacion/","donacion/inicio","donacion/registro","donacion/**")
+				/*.requestMatchers("/donacion/","donacion/inicio","donacion/registro","donacion/**")
 				.permitAll()
 				.requestMatchers("donacion/principal","donacion/donacion")
 								.permitAll()
@@ -30,10 +30,10 @@ public class SecurityConfig {
 				.requestMatchers("donacion/donante/**")
 				.hasAuthority("Donante")
 				.requestMatchers("/donacion/","/donacion/inicio","/donacion/registro")
-				.anonymous()
+				.anonymous()*/
 				.anyRequest()
 				//.authenticated()
-								.permitAll()
+				.permitAll()
 				)
 		
 		.formLogin(l-> l

@@ -41,7 +41,6 @@ public class ProductoStock {
 	
 	@Column(name = "precio")
 	@NotNull(message = "Falta rellenar el campo precio")
-	@Min(value = 1,message = "Ese precio no es permitido" )
 	private Double  precio;
 	
 	
