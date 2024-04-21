@@ -19,6 +19,8 @@ public class DonacionController {
     @GetMapping
     public ResponseEntity<List<Donacion>> getAllDonacions() {
         List<Donacion> donacions = donacionService.getAllDonacions();
+
+        System.out.println(donacions);
         return new ResponseEntity<>(donacions, HttpStatus.OK);
     }
 

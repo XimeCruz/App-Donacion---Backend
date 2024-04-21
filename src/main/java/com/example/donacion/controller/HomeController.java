@@ -2,6 +2,7 @@ package com.example.donacion.controller;
 
 import com.example.donacion.model.Donacion;
 import com.example.donacion.model.ProductoStock;
+import com.example.donacion.model.response.DonacionResponse;
 import com.example.donacion.service.CategoriaService;
 import com.example.donacion.service.DonacionService;
 import com.example.donacion.service.ProductoStockService;
@@ -76,9 +77,25 @@ public class HomeController {
 	@GetMapping(value ="/donacion")
 	public String donacion(Model model,Pageable page) {
 
-		List<Donacion> donaciones = new ArrayList<>(); // donacionService.findAll();
+		List<Donacion> donaciones = donacionService.getAllDonacions();
+		List<DonacionResponse> donacionResponses = new ArrayList<>();
+        for (Donacion donacion : donaciones) {
+            DonacionResponse donacionResponse = new DonacionResponse();
+            donacionResponse.setFechaAdquisicion(String.valueOf(donacion.getFecha_adquisicion()));
+            donacionResponse.setCantidad(donacion.getCantidad());
+            donacionResponse.setNombreProducto(donacion.getProducto().getNombre());
+            donacionResponse.setNombreOrganizacion(donacion.getOrganizacion().getNombre_org());
+            donacionResponse.setNombreDonante(donacion.getDonante().getNombre());
+            donacionResponse.setNombreVoluntarioRecojo(donacion.getVoluntarioRecojo().getNombre());
+            donacionResponses.add(donacionResponse);
+        }
+        //return donacionResponses;
+
+
+
 		System.out.println(donaciones);
-		model.addAttribute("donaciones", donaciones);
+		model.addAttribute("donaciones", donacionResponses);
+		System.out.println(model);
 
 		return "principal/donaciones";
 	}

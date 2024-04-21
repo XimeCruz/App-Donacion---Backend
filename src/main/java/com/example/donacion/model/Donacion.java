@@ -2,9 +2,13 @@ package com.example.donacion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 
+@Getter
+@Setter
 @Table
 @Entity
 public class Donacion {
@@ -14,38 +18,6 @@ public class Donacion {
     private int cantidad;
     private Date fecha_adquisicion;
     private String hora_adquisicion;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public Date getFecha_adquisicion() {
-        return fecha_adquisicion;
-    }
-
-    public void setFecha_adquisicion(Date fecha_adquisicion) {
-        this.fecha_adquisicion = fecha_adquisicion;
-    }
-
-    public String getHora_adquisicion() {
-        return hora_adquisicion;
-    }
-
-    public void setHora_adquisicion(String hora_adquisicion) {
-        this.hora_adquisicion = hora_adquisicion;
-    }
 
 
     @ManyToOne

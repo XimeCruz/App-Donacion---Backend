@@ -9,12 +9,12 @@ VALUES
     (9, 'Admin', 'Admin', 'Admin@gmail.com', '$2a$10$zfHAlRP5PqQLFewPFxDyNO1bTGgOE98OAIPEkoLK4/6HJgDytRRl6', 1, '3148918702', '2004-03-04', 2),
     (10, 'Mateo josue Rodriguez Chico', 'Mateo', 'mateo204r@gmail.com', '$2a$10$zfHAlRP5PqQLFewPFxDyNO1bTGgOE98OAIPEkoLK4/6HJgDytRRl6', 1, '3148918702', '2004-03-04', 1);
 
-INSERT INTO public.producto_carrito (id, id_producto_stock, id_cliente, "cantidad seleccionada", "fecha de agregado")
+INSERT INTO public.producto_carrito (id, id_producto_stock, id_beneficiario, "cantidad seleccionada", "fecha de agregado")
 VALUES
-    (5, 10, 1, 1, '2023-09-12 00:00:00'),
-    (7, 113, 1, 1, '2023-09-12 00:00:00'),
-    (8, 136, 1, 3, '2023-09-12 00:00:00'),
-    (9, 114, 1, 3, '2023-09-12 00:00:00');
+    (5, 10, 10, 1, '2023-09-12 00:00:00'),
+    (7, 113, 10, 1, '2023-09-12 00:00:00'),
+    (8, 136, 10, 3, '2023-09-12 00:00:00'),
+    (9, 114, 10, 3, '2023-09-12 00:00:00');
 
 INSERT INTO public.categoria (id, nombre, descripcion)
 VALUES
@@ -84,15 +84,15 @@ VALUES (1, 'Huerfanos', 'Aldeas Infantiles', 'de tood tipo', 'SIN FINES DE LUCRO
 INSERT INTO public.donacion (id,cantidad, fecha_adquisicion, hora_adquisicion, donante_id, organizacion_id, producto_id, voluntario_id)
 VALUES
     (1,7, '2024-04-18', '09:30:00', 10, 1, 36, 9);
-(25, '2024-04-18', '10:15:00', 33, 68, 14, 50),
-(77, '2024-04-18', '11:00:00', 14, 7, 25, 11),
-(46, '2024-04-18', '12:30:00', 50, 77, 7, 68),
-(33, '2024-04-18', '14:45:00', 92, 11, 68, 25),
-(14, '2024-04-18', '15:20:00', 46, 25, 33, 14),
-(11, '2024-04-18', '16:10:00', 7, 14, 92, 77),
-(68, '2024-04-18', '17:00:00', 68, 50, 46, 7),
-(50, '2024-04-18', '18:20:00', 11, 33, 77, 46),
-(92, '2024-04-18', '19:45:00', 77, 92, 50, 33);
+-- (25, '2024-04-18', '10:15:00', 33, 68, 14, 50),
+-- (77, '2024-04-18', '11:00:00', 14, 7, 25, 11),
+-- (46, '2024-04-18', '12:30:00', 50, 77, 7, 68),
+-- (33, '2024-04-18', '14:45:00', 92, 11, 68, 25),
+-- (14, '2024-04-18', '15:20:00', 46, 25, 33, 14),
+-- (11, '2024-04-18', '16:10:00', 7, 14, 92, 77),
+-- (68, '2024-04-18', '17:00:00', 68, 50, 46, 7),
+-- (50, '2024-04-18', '18:20:00', 11, 33, 77, 46),
+-- (92, '2024-04-18', '19:45:00', 77, 92, 50, 33);
 
 
 

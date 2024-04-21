@@ -28,12 +28,12 @@
                         </thead>
                         <tbody>
                             <tr th:each="donacion : ${donaciones}">
-                                <td th:text="${donacion.fecha}"></td>
+                                <td th:text="${donacion.fechaAdquisicion}"></td>
                                 <td th:text="${donacion.cantidad}"></td>
-                                <td th:text="${donacion.producto.nombre}"></td>
-                                <td th:text="${donacion.organizacion.nombre}"></td>
-                                <td th:text="${donacion.donante.nombre}"></td>
-                                <td th:text="${donacion.voluntarioRecojo.nombre}"></td>
+                                <td th:text="${donacion.nombreProducto}"></td>
+                                <td th:text="${donacion.nombreOrganizacion}"></td>
+                                <td th:text="${donacion.nombreDonante}"></td>
+                                <td th:text="${donacion.nombreVoluntarioRecojo}"></td>
                             </tr>
                         </tbody>
                     </table>
