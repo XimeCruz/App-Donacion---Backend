@@ -93,9 +93,9 @@ public class HomeController {
 
 
 
-		System.out.println(donaciones);
+		//System.out.println(donaciones);
 		model.addAttribute("donaciones", donacionResponses);
-		System.out.println(model);
+		//System.out.println(model);
 
 		return "principal/donaciones";
 	}
