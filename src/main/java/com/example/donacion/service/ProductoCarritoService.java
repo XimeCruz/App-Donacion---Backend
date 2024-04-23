@@ -42,9 +42,11 @@ public class ProductoCarritoService {
         }
     }
 
-    public void guardarProducto(ProductoCarrito productoCarrito, Authentication authentication) {
+    public void guardarProducto(ProductoCarrito productoCarrito) {
+         //public void guardarProducto(ProductoCarrito productoCarrito, Authentication authentication) {
 
-        Usuario beneficiario=clienteServices.GetbyEmail(authentication.getName());
+        //Usuario beneficiario=clienteServices.GetbyEmail(authentication.getName());
+        Usuario beneficiario=clienteServices.GetbyEmail("Admin@gmail.com");
         productoCarrito.setFechaDeAgregado(Date.valueOf(LocalDate.now()));
         productoCarrito.setId(beneficiario.getId());
         productoCarritoRepository.save(productoCarrito);

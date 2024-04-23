@@ -11,12 +11,12 @@
 <body>
    
 
-    <a th:href="@{/carritodecompras/auth}" class="flecha"> <img th:src="@{/images/retroceder.png}" alt="100"></a>
+    <a th:href="@{/donacion/auth}" class="flecha"> <img th:src="@{/images/retroceder.png}" alt="100"></a>
     <div>
 
         <h1 class="h1" id="h1">¿Estás seguro de que quieres cerrar sesión?</h1>
     
-        <form th:action="@{/carritodecompras/logout}" method="post">
+        <form th:action="@{/donacion/logout}" method="post">
             <input type="submit" id="btn" class="btn btn-outline-light rounded-pill" value="Cerrar sesion">
         </form>
     </div>

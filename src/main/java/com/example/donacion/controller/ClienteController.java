@@ -9,6 +9,7 @@ import com.example.donacion.service.ProductoCarritoService;
 import com.example.donacion.service.ProductoStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/donacion/beneficiario")
 public class ClienteController {
 
@@ -38,12 +39,12 @@ public class ClienteController {
 	private final String vistaAgregaralcarrito="vistascompradores/agregaralcarrito";
 	private final String vistaActualizar="vistascompradores/actualizar";
 	private final String carrito="vistascompradores/carrito";
-	private  final String redirectAlCarrito="redirect:/donacion/cliente/elcarrito";
-	private  final String msjActualizado="Se ha actualizado un producto del carrito de compras";
+	private  final String redirectAlCarrito="redirect:/donacion/beneficiario/elcarrito";
+	private  final String msjActualizado="Se ha actualizado un producto de la canasta de donacion";
 	private final String vistaEliminar="vistascompradores/eliminar";
-	private static final String msjAgregado="Se ha agregado un Nuevo producto al Carrito";
-	private static final String msjProductoEncontrado="El producto ya Se encuentra agregado al Carrito";
-	private static final String msjProductoEliminado="Se ha eliminado un producto del Carrito";
+	private static final String msjAgregado="Se ha agregado un nuevo producto a la canasta de donacion";
+	private static final String msjProductoEncontrado="El producto ya se encuentra agregado a la canasta de donacion";
+	private static final String msjProductoEliminado="Se ha eliminado un producto de la canasta de donacion";
 	private final String vistaInformacionProducto ="vistascompradores/informacionproducto";
 
 
@@ -60,12 +61,14 @@ public class ClienteController {
 	@GetMapping( value = "/elcarrito")
 	public String alCarrito(Authentication authentication, Model model) {
 		
-		Usuario cliente=clienteServices.GetbyEmail(authentication.getName());
+		//Usuario cliente=clienteServices.GetbyEmail(authentication.getName());
+
+		Usuario cliente=clienteServices.GetbyEmail("Admin@gmail.com");
 		
 		List<ProductoCarrito>productosCarrito=cliente.getProductoCarritos();
 		model.addAttribute("ProductosCarrito", productosCarrito);
 		
-		return carrito;
+		return "vistascompradores/carrito";
 	}
 	
 	
@@ -97,7 +100,7 @@ public class ClienteController {
 	 * @return la vista del carrito de compras del cliente actual en la sesion. 
 	 */
 	@PostMapping(value = "/producto/agregar")
-	public String AgregarProductoAlCarrito(ProductoCarrito productoCarrito,BindingResult bindingResult, Authentication auth,RedirectAttributes redirectAttributes) {
+	public String AgregarProductoAlCarrito(ProductoCarrito productoCarrito,BindingResult bindingResult,RedirectAttributes redirectAttributes) {
 		
 		
 		if(bindingResult.hasErrors()) {
@@ -105,11 +108,15 @@ public class ClienteController {
 		}
 		
 		else {
-			if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId(), auth)) {
+			//if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId(), auth)) {
+			if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId())) {
 				redirectAttributes.addFlashAttribute("msjIntentoDeAgregado", msjProductoEncontrado);
 			}
 			else {
-				productoCarritoServices.guardarProducto(productoCarrito, auth);
+				//productoCarritoServices.guardarProducto(productoCarrito, auth);
+				Usuario cliente=clienteServices.GetbyEmail("Admin@gmail.com");
+				productoCarrito.setBeneficiario(cliente);
+				productoCarritoServices.guardarProducto(productoCarrito);
 				redirectAttributes.addFlashAttribute("msj", msjAgregado);
 			}
 	
@@ -209,8 +216,8 @@ public class ClienteController {
 	 */
 	@GetMapping( value = "/producto/{id}/informacion")
 	public String informaciondelProductoCarrito(@PathVariable("id")Long id,Model model) {
-		Integer idr= 10;
-		ProductoStock productoStock=productoStockServices.getById(idr.longValue());
+		//Integer idr= 10;
+		ProductoStock productoStock=productoStockServices.getById(id);
 		model.addAttribute("productoInfo",productoStock);
 		model.addAttribute("delCarrito", true);
 

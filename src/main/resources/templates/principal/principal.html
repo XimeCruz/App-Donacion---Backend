@@ -14,19 +14,19 @@
     <div class="container">
 
         <ul class="nav" id="menu-opciones">
-            <li class="nav-item">
-                <div id="por-precio" class="dropdown">
-                    <button class="btn btn-outline-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      filtrar por precio
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(hasta=50000.0)}" >menor a 50.000</a></li>
-                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(desde=50000.0,hasta=100000.0)}">50.000 - 100.000</a></li>
-                      <li><a class="dropdown-item"th:href="@{/donacion/productos/buscar/precio(desde=150000.0,hasta=200000.0)}">150.000 - 200.000</a></li>
-                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(desde=200000.0)}" >mayor a 200.000</a></li>
-                    </ul>
-                  </div>
-            </li>
+<!--            <li class="nav-item">-->
+<!--                <div id="por-precio" class="dropdown">-->
+<!--                    <button class="btn btn-outline-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                      filtrar por precio-->
+<!--                    </button>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(hasta=50000.0)}" >menor a 50.000</a></li>-->
+<!--                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(desde=50000.0,hasta=100000.0)}">50.000 - 100.000</a></li>-->
+<!--                      <li><a class="dropdown-item"th:href="@{/donacion/productos/buscar/precio(desde=150000.0,hasta=200000.0)}">150.000 - 200.000</a></li>-->
+<!--                      <li><a class="dropdown-item" th:href="@{/donacion/productos/buscar/precio(desde=200000.0)}" >mayor a 200.000</a></li>-->
+<!--                    </ul>-->
+<!--                  </div>-->
+<!--            </li>-->
             <li class="nav-item" id="ordenar">
                 <div id="por-precio" class="dropdown">
                     <button class="btn btn-outline-primary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,8 +34,8 @@
                     </button>
                     <ul class="dropdown-menu" >
                       <li><a class="dropdown-item " th:href="@{/donacion/productos(orden='fecha_ASC')}">por fecha de publicación</a></li>
-                      <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='precio_ASC')}">de menor a mayor precio</a></li>
-                      <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='precio_DESC')}">de mayor a menor precio</a></li>
+<!--                      <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='precio_ASC')}">de menor a mayor precio</a></li>-->
+<!--                      <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='precio_DESC')}">de mayor a menor precio</a></li>-->
                       <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='cantidad_disponible_DESC')}">por unidades disponible</a></li>
                     </ul>
                   </div>
@@ -66,7 +66,7 @@
                                         <a th:href="@{/donacion/beneficiario/producto/{id}/informacion(id=${producto.id})}"  id="btn-card"   class="btn btn-outline-secondary rounded-pill">Informacion</a>
                                     </div>
                                     <div>
-                                        <a th:href="@{/donacion/cliente/producto/agregar/{id} (id=${producto.id})}" id="btn-card2" class="btn btn-outline-primary rounded-pill">Agregar al carrito de donacion</a>
+                                        <a th:href="@{/donacion/beneficiario/producto/agregar/{id} (id=${producto.id})}" id="btn-card2" class="btn btn-outline-primary rounded-pill">Agregar al carrito de donacion</a>
                                     </div>
   
                                 </div>
@@ -77,14 +77,14 @@
                 <nav th:if="${ ispageable==true}" aria-label="Page navigation example" >
                     <ul th:if="${productos.totalPages > 0}" class="pagination justify-content-center">
                         <li class="page-item" th:classappend="${productos.number == 0 ? 'disabled' : ''}">
-                            <a th:href="@{/carritodecompras/principal(page=${productos.number - 1})}" class="page-link">Anterior</a>
+                            <a th:href="@{/donacion/principal(page=${productos.number - 1})}" class="page-link">Anterior</a>
                         </li>
                                     
                         <li class="page-item" th:classappend="${i eq productos.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, productos.totalPages, 1)}">
-                            <a class="page-link" th:href="@{/carritodecompras/principal?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+                            <a class="page-link" th:href="@{/donacion/principal?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
                         </li>
                         <li class="page-item" th:classappend="${productos.number == (productos.totalPages - 1) ? 'disabled' : ''}">
-                            <a th:href="@{/carritodecompras/principal(page=${productos.number + 1})}" class="page-link">Siguiente</a>
+                            <a th:href="@{/donacion/principal(page=${productos.number + 1})}" class="page-link">Siguiente</a>
                         </li>
                     </ul>
                 </nav>

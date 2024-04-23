@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
-@RequestMapping("/carritodecompras")
+@RequestMapping("/donacion")
 public class LogoutPersonalizado {
 
 	@PostMapping("/logout")

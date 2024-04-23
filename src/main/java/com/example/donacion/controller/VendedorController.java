@@ -143,8 +143,8 @@ public class VendedorController {
 	private static final String listaProductos="vistasvendedores/misproductos";
 	private static final String vistaactualizar="vistasvendedores/actualizarproducto";
 	private static final String vistaagregar="vistasvendedores/agregarproducto";
-	private static final String eliminar="redirect:/carritodecompras/vendedor/misproductos";
-	private static final String redirectListado="redirect:/carritodecompras/vendedor/misproductos";
+	private static final String eliminar="redirect:/donacions/vendedor/misproductos";
+	private static final String redirectListado="redirect:/donacions/vendedor/misproductos";
 	private static final String msjAgregado="Se ha agregado un Nuevo producto al listado";
 	private static final String msjActualizado="Se ha actualizado un producto del listado ";
 	private static final String msjEliminado="Se ha eliminado un producto de la tienda ";

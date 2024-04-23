@@ -16,7 +16,7 @@
 					<h4 class="h3" id="title">Eliminar este producto del carrito</h4>
 				</div>
 				<div class="card-body" style="display: block;">
-					<form th:action="@{/carritodecompras/cliente/elcarrito/eliminar}" th:object="${productoEliminar}">
+					<form th:action="@{/donacion/beneficiario/elcarrito/eliminar}" th:object="${productoEliminar}">
 						<input type="hidden" th:field="*{id}" id="">
 						<div>
 							<img th:src="@{\images\eliminar-producto.png}" class="img">

@@ -1,0 +1,14 @@
+<!-- usuario.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Usuario</title>
+</head>
+<body>
+    <h1>Detalles del Usuario</h1>
+    <p>Nombre: <span th:text="${usuario.nombre}"></span></p>
+    <!-- Aquí puedes mostrar más detalles del usuario según sea necesario -->
+    <a href="/enviar-notificacion">Enviar Notificación</a>
+</body>
+</html>

@@ -19,7 +19,7 @@
 						<h3 class="h3"> Información sobre este producto</h3>
 					</div>
 					<div th:if="${delCarrito!=false}" class="btn-agregar">
-						<a th:href="@{/carritodecompras/cliente/producto/agregar/{id} (id=${productoInfo.id})}" id="btn-card2" class="btn btn-outline-primary rounded-pill">Agregar al carrito</a>
+						<a th:href="@{/donacion/beneficiario/producto/agregar/{id} (id=${productoInfo.id})}" id="btn-card2" class="btn btn-outline-primary rounded-pill">Agregar al carrito</a>
 					</div>
 				</div>
 				<div class="card-body" >
@@ -31,9 +31,9 @@
 							<h6  id="titulo" class="card-title h4" th:text="${productoInfo.nombre}" > NOMBRE DEL PRODUCTO</h6>	
 							<p id="parrafo" th:text="${productoInfo.descripcion}"></p>
 							<hr style="color: white;">
-							<p id="parrafo">Precio: 
-								<strong class="h6" th:text="${'$ '+ productoInfo.precio+' COP'}" > </strong>
-							</p>
+<!--							<p id="parrafo">Precio: -->
+<!--								<strong class="h6" th:text="${'$ '+ productoInfo.precio+' COP'}" > </strong>-->
+<!--							</p>-->
 							<p id="parrafo" >
 								<strong class="h6">Categoria: </strong><span class="txt-normal" th:text="${productoInfo.categoria.nombre}"></span>
 							</p>
@@ -44,10 +44,10 @@
 							
 							<hr style="color: white;">
 							<h6  id="titulo" class="card-title h4" >Detalles del producto</h6>
-							<p id="parrafo">
-								<strong>Publicado por:</strong>
-								<span class="txt-normal" th:text="${productoInfo.vendedor.nombre}" ></span>
-							</p>
+<!--							<p id="parrafo">-->
+<!--								<strong>Publicado por:</strong>-->
+<!--								<span class="txt-normal" th:text="${productoInfo.donante.nombre}" ></span>-->
+<!--							</p>-->
 							<p id="parrafo" >
 								<strong >Fecha de publicación: </strong>
 								<span class="txt-normal" th:text="${productoInfo.fechaDePublicacion}"></span>

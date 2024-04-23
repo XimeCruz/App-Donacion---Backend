@@ -44,10 +44,12 @@ public class ClienteService {
 
         return usuarioRepository.findByCorreoElectronico(email);
     }
-    public boolean buscarProductoStockEnCarritoCliente(Long id, Authentication authentication) {
 
+    //public boolean buscarProductoStockEnCarritoCliente(Long id, Authentication authentication) {
+
+    public boolean buscarProductoStockEnCarritoCliente(Long id) {
         return usuarioRepository
-                .findByCorreoElectronico(authentication.getName())
+                .findByCorreoElectronico("Admin@gmail.com")
                 .getProductoCarritos()
                 .stream()
                 .filter(p ->p.getProductoStock()

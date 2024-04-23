@@ -16,7 +16,7 @@
           <h2 class="h1">Actualizar datos del producto  <img th:src="@{/images/actualizar.png}"> </h2>
         </div>
         <div class="card-body"> 
-          <form class="row g-3 needs-validation" th:object="${productoActualizar}" th:action="@{/carritodecompras/vendedor/producto/actualizado}" method="Post" >
+          <form class="row g-3 needs-validation" th:object="${productoActualizar}" th:action="@{/donacion/vendedor/producto/actualizado}" method="Post" >
           
             <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger alert-dismissible fade show" role="alert"> 
 		        <ul >
@@ -47,11 +47,11 @@
             </div>
            
 
-            <div class="col-md-4">
-              <label for="validationCustom02" class="form-label">Precio COP</label>
-              <input  placeholder="Precio del articulo en pesos colombianos"  type="number" class="form-control" id="validationCustom02" min="0" th:value="${productoActualizar.precio}"  th:field="*{precio}" required>
-            
-            </div>
+<!--            <div class="col-md-4">-->
+<!--              <label for="validationCustom02" class="form-label">Precio COP</label>-->
+<!--              <input  placeholder="Precio del articulo en pesos colombianos"  type="number" class="form-control" id="validationCustom02" min="0" th:value="${productoActualizar.precio}"  th:field="*{precio}" required>-->
+<!--            -->
+<!--            </div>-->
             <div class="col-md-4">
               <label for="validationCustom02" class="form-label">Unidades disponibles</label>
               <input type="number" class="form-control" id="validationCustom02" min="0" th:value="${productoActualizar.unidadesDisponibles}"  th:field="*{unidadesDisponibles}" required>

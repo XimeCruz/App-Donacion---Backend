@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="nav-item" >
-                  <a class="nav-link" th:href="@{/donacion/cliente/elcarrito}">Ir al carrito
+                  <a class="nav-link" th:href="@{/donacion/beneficiario/elcarrito}">Ir al carrito
                   	<img class="ir-al-carrito" th:src="@{/images/carrito-de-compras.png}">
                   </a>
                 </li>
@@ -52,7 +52,7 @@
                     Mas acciones
                   </a>
                   <ul  class="dropdown-menu dropdown-menu-dark">
-                    <li sec:Authorize="hasAnyAuthority('Vendedor')"><a class="dropdown-item" th:href="@{/carritodecompras/vendedor/producto/nuevo}">Publicar nuevo producto</a></li>
+                    <li sec:Authorize="hasAnyAuthority('Vendedor')"><a class="dropdown-item" th:href="@{/donacion/vendedor/producto/nuevo}">Publicar nuevo producto</a></li>
                     <li><a class="dropdown-item" href="#">Información de la cuenta</a></li>
                     <li><a class="dropdown-item" href="#">Preguntas frecuentes</a></li>
                     <li><a class="dropdown-item" href="#">Clientes</a></li>
@@ -61,7 +61,7 @@
                   </ul>
                 </li>
                 <li class="nav-item" sec:Authorize="isAuthenticated">
-                  <a class="nav-link active" aria-current="page" th:href="@{/carritodecompras/logout}">cerrar sesión</a>
+                  <a class="nav-link active" aria-current="page" th:href="@{/donacion/logout}">cerrar sesión</a>
               </li>
               </ul>
             </div>

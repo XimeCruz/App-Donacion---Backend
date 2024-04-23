@@ -19,7 +19,7 @@
         
         <div class="card-body" > 
           
-          <form th:action="@{/carritodecompras/vendedor/producto/agregar}" method="POST" th:object="${productoStock}" class="row g-3 needs-validation" novalidate>
+          <form th:action="@{/donacion/donante/producto/agregar}" method="POST" th:object="${productoStock}" class="row g-3 needs-validation" novalidate>
 	         
             <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger alert-dismissible fade show" role="alert"> 
 		        <ul >
@@ -52,12 +52,12 @@
             </div>
            
 
-            <div class="col-md-4">
-              <label for="validationCustom02" class="form-label" >Precio COP</label>
-              <input  placeholder="Precio del articulo en pesos colombianos" type="number" class="form-control" id="validationCustom02" min="0" th:field="*{precio}" required="required">
-              <div class="valid-feedback">
-                
-              </div> 
+<!--            <div class="col-md-4">-->
+<!--              <label for="validationCustom02" class="form-label" >Precio COP</label>-->
+<!--              <input  placeholder="Precio del articulo en pesos colombianos" type="number" class="form-control" id="validationCustom02" min="0" th:field="*{precio}" required="required">-->
+<!--              <div class="valid-feedback">-->
+<!--                -->
+<!--              </div> -->
             </div>
             <div class="col-md-4">
               <label for="validationCustom02" class="form-label">Unidades disponibles</label>

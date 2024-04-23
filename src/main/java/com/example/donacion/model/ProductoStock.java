@@ -53,6 +53,9 @@ public class ProductoStock {
 	
 	@Column(name = "fechaPublicacion")
 	private Date fechaDePublicacion;
+
+	@Column(name = "fechaVencimiento")
+	private Date fechaDeVencimiento;
 	
 	/**
 	 * Identifica el vendedor que ha publicado este producto en la tienda.

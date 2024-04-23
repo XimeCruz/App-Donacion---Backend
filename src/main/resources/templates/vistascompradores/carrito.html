@@ -16,11 +16,11 @@
       
         <div class="card" id="card-principal" >
             <div class="card-header">
-               <h2 class="h1">Mi carrito de compras</h2>
+               <h2 class="h1">Mi eleccion de donaciones</h2>
             </div>
             
             <div class="card-body">
-              <a th:href="@{/carritodecompras/principal}"><button type="button" class="btn btn-outline-primary">Ir de compras</button></a> 
+              <a th:href="@{/donacion/principal}"><button type="button" class="btn btn-outline-primary">Ver mas donaciones</button></a>
             
               
               <div th:if="${msj !=null }" class="alert alert-success alert-dismissible fade show" id="msj" role="alert">
@@ -42,9 +42,9 @@
               <table class="table table-dark table-hover"> 
                 <thead >
                   <tr>
-                    <th nowrap="nowrap"  scope="col">Id. Posible compra</th> 
+                    <th nowrap="nowrap"  scope="col">Id. Donacion</th>
                     <th nowrap="nowrap"  scope="col">Nombre</th> 
-                    <th nowrap="nowrap"  scope="col">Precio</th>    
+                    <th nowrap="nowrap"  scope="col">Fecha de Vencimiento</th>
                     <th nowrap="nowrap"  scope="col" colspan="1" >cantidad seleccionada</th>    
                     <th nowrap="nowrap"  scope="col" colspan="3" id="operaciones" >Operaciones</th>
                   </tr>
@@ -54,16 +54,16 @@
                   <tr th:each="productoCarrito: ${ProductosCarrito}"> 
                     <td th:text="${productoCarrito.id}"></td>
                     <td th:text="${productoCarrito.productoStock.nombre}"></td>
-                    <td th:text="${productoCarrito.productoStock.precio}"></td>   
+                    <td th:text="${productoCarrito.productoStock.fechaDeVencimiento}"></td>
                     <td th:text="${productoCarrito.cantidadSeleccionada}"></td>                	
                     <td>  
-                      <a th:href="@{/carritodecompras/cliente/elcarrito/actualizar/{id} (id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-success">Actualizar</button></a>
+                      <a th:href="@{/donacion/beneficiario/elcarrito/actualizar/{id} (id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-success">Actualizar</button></a>
                     </td>                   
                     <td > 
-                      <a  th:href="@{/carritodecompras/cliente/elcarrito/{id}/eliminar(id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-danger" >Eliminar</button></a> 
+                      <a  th:href="@{/donacion/beneficiario/elcarrito/{id}/eliminar(id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-danger" >Eliminar</button></a>
                     </td>                   
                     <td >                      
-                      <a th:href="@{/carritodecompras/cliente/producto/{id}/informacion (id=${productoCarrito.productoStock.id})}" ><button type="button" class="btn btn-outline-warning">Informacion</button></a>                   
+                      <a th:href="@{/donacion/beneficiario/producto/{id}/informacion (id=${productoCarrito.productoStock.id})}" ><button type="button" class="btn btn-outline-warning">Informacion</button></a>
                     </td>                  
                   </tr>
                 </tbody>
