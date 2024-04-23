@@ -12,9 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,7 +47,7 @@ public class ProductoStockService {
     public void guardarProducto(ProductoStock productoStock, Authentication authentication) {
 
         Usuario donante=vendedorServices.GetbyEmail(authentication.getName());
-        productoStock.setFechaDePublicacion(Date.valueOf(LocalDate.now()));
+        productoStock.setFechaDePublicacion(java.sql.Date.valueOf(LocalDate.now()));
         productoStock.setDonante(donante);
         productoStockRepository.save(productoStock);
     }
@@ -138,6 +138,10 @@ public class ProductoStockService {
                 .stream()
                 .filter(P -> P.getPrecio()>=precio)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public List<ProductoStock> findByFechaVencBetween(Date fechaActual, Date fechaProximaSemana){
+        return productoStockRepository.findByFechaDeVencimientoBetween(fechaActual,fechaProximaSemana);
     }
 
 }

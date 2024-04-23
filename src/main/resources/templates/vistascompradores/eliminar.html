@@ -13,19 +13,19 @@
 		<div class="container">
 			<div class="card" id="card_principal">
 				<div class="card-header">
-					<h4 class="h3" id="title">Eliminar este producto del carrito</h4>
+					<h4 class="h3" id="title">Eliminar este producto de la canasta</h4>
 				</div>
 				<div class="card-body" style="display: block;">
 					<form th:action="@{/donacion/beneficiario/elcarrito/eliminar}" th:object="${productoEliminar}">
 						<input type="hidden" th:field="*{id}" id="">
 						<div>
-							<img th:src="@{\images\eliminar-producto.png}" class="img">
+							<img th:src="@{${productoEliminar.productoStock.imagen}}" class="img">
 						</div>
 						<div class="div-info">
 							<h5 class="card-title" th:text="${productoEliminar.productoStock.nombre}"></h5>
 							<hr>
 							<p class="card-text" th:text="${productoEliminar.productoStock.descripcion}"></p>
-							<p class="card-text">Precio: <strong th:text="${productoEliminar.productoStock.precio}"></strong></p>
+							<p class="card-text">Fecha de Vencimiento : <strong th:text="${productoEliminar.productoStock.fechaDeVencimiento}"></strong></p>
 							
 							<div class="div-cantidad">
 								<p  >Cantidad seleccionada: <strong th:text="${productoEliminar.cantidadSeleccionada}"></strong></p>

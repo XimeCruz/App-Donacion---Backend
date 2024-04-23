@@ -7,7 +7,7 @@ strong,hr,#parrafo,#titulo{
 background-color: white;
 }
 .card-body{
-    background:linear-gradient(to right,#141E30,#243B55);
+    background: #141E30;
 }
 .btn-agregar{
     
@@ -20,7 +20,7 @@ background-color: white;
 #div-img{
     display: flex; 
     align-items: center;
-    background:linear-gradient(to right,#C7C7C7,#F0F2F0);
+    background: #141E30;
 }
 .txt-normal{
     font-weight: normal;

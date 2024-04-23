@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
+@ToString
 @AllArgsConstructor
 public class Notificacion {
 
@@ -20,7 +22,7 @@ public class Notificacion {
 
 
     @OneToOne
-    private Producto producto;
+    private ProductoStock producto;
 
     public Notificacion() {
 

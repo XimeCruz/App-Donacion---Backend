@@ -1,7 +1,7 @@
 <header th:fragment="header"> 
     <nav class="navbar navbar-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" th:href="@{/donacion/principal}"><img class="logo"  th:src="@{/images/Logo.svg}"> Administrador </a>
+          <a class="navbar-brand" th:href="@{/donacion/principal}"><img class="logo"  th:src="@{/images/Logo.svg}"> Donacion </a>
 
           
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -45,6 +45,10 @@
 
                 <li class="nav-item">
                   <a class="nav-link" th:href="@{/donacion/donacion}">Seguimiento de donaciones</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" th:href="@{/donacion/notificaciones}">Notificaciones</a>
                 </li>
 
                 <li class="nav-item dropdown">

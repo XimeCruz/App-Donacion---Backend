@@ -1,10 +1,12 @@
 package com.example.donacion.controller;
 
 import com.example.donacion.model.Donacion;
+import com.example.donacion.model.Notificacion;
 import com.example.donacion.model.ProductoStock;
 import com.example.donacion.model.response.DonacionResponse;
 import com.example.donacion.service.CategoriaService;
 import com.example.donacion.service.DonacionService;
+import com.example.donacion.service.NotificacionService;
 import com.example.donacion.service.ProductoStockService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,8 @@ import java.util.List;
 @RequestMapping(value = "/donacion")
 public class HomeController {
 
-	
+	@Autowired
+	NotificacionService notificacionService;
 	/**
 	 * devuelve la ubicacion del archivo en el que se encuentra la pagina principal.
 	 * 
@@ -71,7 +74,34 @@ public class HomeController {
 		model.addAttribute("productos",productos);
 		model.addAttribute("ispageable", true);
 
+		Notificacion notification = obtenerNotificacion();
+		if (!(notification == null)) {
+			System.out.println(notification);
+			model.addAttribute("notification", notification);
+		} else {
+			model.addAttribute("notification", null);
+		}
+
+
 		return "principal/principal";
+	}
+
+	private Notificacion obtenerNotificacion() {
+		Notificacion notificacion = new Notificacion();
+
+		List<ProductoStock> productoStocks = notificacionService.obtenerProductosProximosAVencer();
+
+		if (!(productoStocks == null)) {
+			ProductoStock ultimoProducto = productoStocks.get(productoStocks.size() - 1);
+			System.out.println("El último producto es: " + ultimoProducto);
+			notificacion.setMensaje("El producto "+ultimoProducto.getNombre()+" esta proximo a venderse");
+			notificacion.setProducto(ultimoProducto);
+			return notificacion;
+		} else {
+			System.out.println("La lista de productos está vacía.");
+		}
+
+		return null;
 	}
 
 	@GetMapping(value ="/donacion")

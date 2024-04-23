@@ -5,6 +5,7 @@ import com.example.donacion.model.ProductoStock;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,4 +15,6 @@ public interface ProductoStockRepository extends JpaRepository<ProductoStock,Lon
     List<ProductoStock> findByCategoria(Categoria categoria);
 
     List<ProductoStock> findByPrecioBetween(Double min, Double max);
+
+    public List<ProductoStock> findByFechaDeVencimientoBetween(Date fechaIni, Date fechaFin);
  }

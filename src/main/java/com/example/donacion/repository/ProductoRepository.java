@@ -10,4 +10,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     public List<Producto> findByFechaVencBefore (Date fecha);
 
+
+
 }
