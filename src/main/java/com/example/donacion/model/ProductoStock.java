@@ -68,7 +68,9 @@ public class ProductoStock {
 	@JoinColumn(name = "IdDonante")
 	private Usuario donante;
 	
-	
+	// private String estado; // Nuevo, Usado, etc.
+    private boolean confirmado = false;
+
 	/**
 	 * lista de Productos que han sido agregado en el carrito de compras y hacen referencia a este producto de la tienda.
 	 */

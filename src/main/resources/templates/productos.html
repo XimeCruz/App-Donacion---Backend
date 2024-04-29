@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Productos</title>
+</head>
+<body>
+    <h1>Productos en Stock</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Unidades Disponibles</th>
+            <th>Fecha de Publicación</th>
+            <th>Fecha de Vencimiento</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+        </tr>
+        <tr th:each="producto : ${productos}">
+            <td th:text="${producto.id}"></td>
+            <td th:text="${producto.nombre}"></td>
+            <td th:text="${producto.descripcion}"></td>
+            <td th:text="${producto.categoria.nombre}"></td>
+            <td th:text="${producto.precio}"></td>
+            <td th:text="${producto.unidadesDisponibles}"></td>
+            <td th:text="${#dates.format(producto.fechaDePublicacion, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#dates.format(producto.fechaDeVencimiento, 'dd/MM/yyyy')}"></td>
+            <td><img th:src="@{${producto.imagen}}" alt="Imagen del Producto" height="50" width="50"/></td>
+            <td>
+                <form th:action="@{'/productos/aceptar/' + ${producto.id}}" method="post">
+                    <input type="submit" value="Aceptar">
+                </form>
+                <form th:action="@{'/productos/eliminar/' + ${producto.id}}" method="post">
+                    <input type="submit" value="Eliminar">
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -70,7 +70,9 @@ public class Usuario {
 	@NotNull(message = "El campo fecha de nacimiento no puede estar vacio")
 	@Column(name = "fecha de nacimiento")
 	private Date fechaDeNacimiento;
-	
+
+
+	private String direccion;
 	
 	/**
 	 *Identifica el rol de un usuario en la entidad usuarios en la base de datos. 
