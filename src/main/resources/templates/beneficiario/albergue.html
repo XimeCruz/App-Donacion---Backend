@@ -1,70 +1,135 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${albergue.nombre}"></title>
-    <script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleApiKey} + '&callback=initMap'"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/comprador/carrito.css}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<meta charset="UTF-8">
+  <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.umd.min.js"></script>
+  <link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.css" rel="stylesheet" />
     <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
+        .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .date-time-input {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .date-time-input input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+    #map {
+      width: 50%;
+      height: 60vh;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    #info {
+      display: none;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+      padding: 10px;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    #locationInput {
+      padding: 10px;
+      width: 350px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      text-align: center;
+      margin-top: 10px;
+    }
+    @media (max-width: 768px) {
+      #map {
+        width: 100%;
+        height: 50vh;
+      }
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .submit-button {
+      padding: 10px 140px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
+    }
+
+    @media (max-width: 768px) {
+      .submit-button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
     </style>
-    <script>
-        function initMap() {
-            var location = {lat: [[${albergue.latitud}]], lng: [[${albergue.longitud}]]};
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: location
-            });
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            });
-        }
-    </script>
 </head>
 <body>
     <h1 th:text="${albergue.nombre}"></h1>
     <img th:src="@{${albergue.imagen}}" alt="Imagen del Albergue" style="width:300px;height:200px;">
     <p><b>Dirección:</b> <span th:text="${albergue.direccion}"></span></p>
-    <p><b>Teléfono:</b> <span th:text="${albergue.telefono}"></span></p>
-    <p><b>Email:</b> <span th:text="${albergue.email}"></span></p>
     <p><b>Capacidad:</b> <span th:text="${albergue.capacidad} + ' personas'"></span></p>
     <div id="map"></div>
+<!--    <script>-->
+<!--        var map = new maptiler.Map({-->
+<!--            container: 'map',-->
+<!--            style: 'https://api.maptiler.com/maps/streets/style.json?key=' + [[${apiKey}]],-->
+<!--            center: [${albergue.longitud}, ${albergue.latitud}], // longitud, latitud-->
+<!--            zoom: 12-->
+<!--        });-->
+
+<!--        new maptiler.Marker()-->
+<!--            .setLngLat([${albergue.longitud}, ${albergue.latitud}])-->
+<!--            .addTo(map);-->
+<!--    </script>-->
+
+    <script>
+              maptilersdk.config.apiKey = 'r3NiLHgrItLbXSqA7eh4';
+              const map = new maptilersdk.Map({
+                container: 'map',
+                style: maptilersdk.MapStyle.STREETS,
+                center: [16.62662018, 49.2125578],
+                zoom: 14,
+              });
+              var marker = new maptilersdk.Marker().setLngLat([16.62662018, 49.2125578]).addTo(map);
+              map.on('click', function(e) {
+                var latLng = e.lngLat;
+                marker.setLngLat(latLng);
+                document.getElementById('info').textContent = "Ubicación seleccionada: " + latLng.lat + ", " + latLng.lng;
+                document.getElementById('locationInput').value = latLng.lat + ", " + latLng.lng;
+              });
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                  var latLng = [position.coords.longitude, position.coords.latitude];
+                  map.setCenter(latLng);
+                  marker.setLngLat(latLng);
+                  document.getElementById('info').textContent = "Tu ubicación actual: " + latLng[1] + ", " + latLng[0];
+                });
+              } else {
+                alert('Geolocalización no es soportada en este navegador.');
+              }
+    </script>
 </body>
 </html>
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--  <head>-->
-<!--    <title>Simple Map</title>-->
-<!--    <meta name="viewport" content="initial-scale=1.0">-->
-<!--    <meta charset="utf-8">-->
-<!--    <style>-->
-<!--      /* Always set the map height explicitly to define the size of the div-->
-<!--       * element that contains the map. */-->
-<!--      #map {-->
-<!--        height: 100%;-->
-<!--      }-->
-<!--      /* Optional: Makes the sample page fill the window. */-->
-<!--      html, body {-->
-<!--        height: 100%;-->
-<!--        margin: 0;-->
-<!--        padding: 0;-->
-<!--      }-->
-<!--    </style>-->
-<!--  </head>-->
-<!--  <body>-->
-<!--    <div id="map"></div>-->
-<!--    <script>-->
-<!--      var map;-->
-<!--      function initMap() {-->
-<!--        map = new google.maps.Map(document.getElementById('map'), {-->
-<!--          center: {lat: -34.397, lng: 150.644},-->
-<!--          zoom: 8-->
-<!--        });-->
-<!--      }-->
-<!--    </script>-->
-<!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhsyuaCu5aBp_kqkkXvTYAdFXFzfHJgug"-->
-<!--    async defer></script>-->
-<!--  </body>-->
-<!--</html>-->

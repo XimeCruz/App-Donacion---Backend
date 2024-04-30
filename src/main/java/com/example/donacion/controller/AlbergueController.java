@@ -120,18 +120,15 @@ public class AlbergueController {
     @GetMapping("/albergue")
     public String getAlbergue(Model model) {
         Albergue albergue = new Albergue();
-        // Supongamos que estos son valores de ejemplo
         albergue.setNombre("Albergue Esperanza");
         albergue.setDireccion("123 Calle Ficticia, Ciudad");
-        albergue.setTelefono("123-456-7890");
-        albergue.setEmail("contacto@albergue.esperanza.org");
-        albergue.setImagen("ruta/a/imagen.jpg");
-        albergue.setLatitud(-34.397);
-        albergue.setLongitud(150.644);
+        albergue.setImagen("/images/albergue.jpg");
+        albergue.setLatitud(40.730610); // Ejemplo de latitud
+        albergue.setLongitud(-73.935242); // Ejemplo de longitud
         albergue.setCapacidad(100);
 
         model.addAttribute("albergue", albergue);
-        model.addAttribute("googleApiKey", "AIzaSyBhsyuaCu5aBp_kqkkXvTYAdFXFzfHJgug");
+        model.addAttribute("apiKey", "r3NiLHgrItLbXSqA7eh4");
 
         return "beneficiario/albergue";
     }
