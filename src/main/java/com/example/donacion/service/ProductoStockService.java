@@ -144,4 +144,11 @@ public class ProductoStockService {
         return productoStockRepository.findByFechaDeVencimientoBetween(fechaActual,fechaProximaSemana);
     }
 
+    // Método para confirmar estado del producto
+    public void confirmarProducto(Long id) {
+        ProductoStock producto = productoStockRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        producto.setConfirmado(true);
+        productoStockRepository.save(producto);
+    }
+
 }

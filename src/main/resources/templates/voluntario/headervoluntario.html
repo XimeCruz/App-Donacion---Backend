@@ -1,17 +1,8 @@
 <header th:fragment="header"> 
     <nav class="navbar navbar-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" th:href="@{/donacion/principal}"><img class="logo"  th:src="@{/images/Logo.svg}"> Donacion </a>
+          <a class="navbar-brand" th:href="@{/donacion/voluntario/principal}"><img class="logo"  th:src="@{/images/Logo.svg}"> Donacion </a>
 
-          
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li class="nav-item dropdown"> <a  id="categoria" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a> 
-            <ul class="dropdown-menu"> 
-             <li><a class="dropdown-item h6"  th:each="categoria : ${categorias}"  th:href="@{/donacion/categoria/{id} (id= ${categoria.id})}" th:text="${categoria.nombre}"></a></li>
-            </ul> 
-          </li> 
-        </ul>
-      
         
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,48 +17,40 @@
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
                 <li secAuthorize="isAuthenticated()">
-                  <p class="h5">¡Hola, <span  sec:authentication="name" ></span>!</p>
+                  <p class="h5">¡Hola, voluntario<!--span  sec:authentication="name" ></span-->!</p>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" th:href="@{/donacion/principal}">Home</a>
+                  <a class="nav-link active" aria-current="page" th:href="@{/donacion/voluntario/principal}">Inicio</a>
                 </li>
 
-                <li class="nav-item" >
-                  <a class="nav-link" th:href="@{/donacion/beneficiario/elcarrito}">Ir al carrito
-                  	<img class="ir-al-carrito" th:src="@{/images/carrito-de-compras.png}">
-                  </a>
-                </li>
 
-                <li class="nav-item" sec:Authorize="hasAnyAuthority('Vendedor')">
-                  <a class="nav-link" th:href="@{/donacion/vendedor/misproductos}">Mis productos</a>
+
+                <li class="nav-item">
+                  <a class="nav-link" th:href="@{/donacion/voluntario/albergues}">Albergues</a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" th:href="@{/donacion/donacion}">Seguimiento de donaciones</a>
+                  <a class="nav-link" th:href="@{/donacion/voluntario/notificaciones}">Notificaciones</a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" th:href="@{/donacion/notificaciones}">Notificaciones</a>
+                  <a class="nav-link" th:href="@{/donacion/voluntario/actividades}">Actividades realizadas</a>
                 </li>
 
-                <li class="nav-item">
-                  <a class="nav-link" th:href="@{/productos}">Verificación de Productos</a>
-                </li>
-
-                <li class="nav-item dropdown">
+                <!--li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Mas acciones
                   </a>
                   <ul  class="dropdown-menu dropdown-menu-dark">
-                    <li sec:Authorize="hasAnyAuthority('Vendedor')"><a class="dropdown-item" th:href="@{/donacion/vendedor/producto/nuevo}">Publicar nuevo producto</a></li>
+                    <li><a class="dropdown-item" th:href="@{/donacion/vendedor/producto/nuevo}">Publicar nuevo producto</a></li>
                     <li><a class="dropdown-item" href="#">Información de la cuenta</a></li>
                     <li><a class="dropdown-item" href="#">Preguntas frecuentes</a></li>
                     <li><a class="dropdown-item" href="#">Clientes</a></li>
                     <li><a class="dropdown-item" href="#">Acerca de</a></li>
                  
                   </ul>
-                </li>
+                </li-->
                 <li class="nav-item" sec:Authorize="isAuthenticated">
                   <a class="nav-link active" aria-current="page" th:href="@{/donacion/logout}">cerrar sesión</a>
               </li>
