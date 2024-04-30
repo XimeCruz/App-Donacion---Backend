@@ -134,8 +134,6 @@ VALUES
     (36, 'Papel Aluminio', 'Rollo de papel aluminio resistente', 6, 2, 90, 10, '2024-04-18');
 
 
-<<<<<<< HEAD
-=======
 INSERT INTO public.organizacion (id, area_servicio, nombre_org, tipo_alimento, tipo_org, ubicacion)
 VALUES (1, 'Huerfanos', 'Aldeas Infantiles', 'de tood tipo', 'SIN FINES DE LUCRO', 'AV.olmos');
 
@@ -185,4 +183,4 @@ INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_ve
 INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen, confirmado) VALUES (35, 'Shampoo revitalizante para cabello', '2024-04-18', null, 'Shampoo', 4, 60, 6, 10, '/images/shampoo.jpg', true);
 INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen, confirmado) VALUES (33, 'Detergente líquido para ropa', '2024-04-18', null, 'Detergente', 3, 80, 6, 10, '/images/detergente.jpg', true);
 
->>>>>>> 0adc22cca0cf554932507fc9a21466c48a10ee24
+
