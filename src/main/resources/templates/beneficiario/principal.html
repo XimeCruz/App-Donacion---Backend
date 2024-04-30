@@ -20,8 +20,8 @@
                       ordenar donaciones
                     </button>
                     <ul class="dropdown-menu" >
-                      <li><a class="dropdown-item " th:href="@{/donacion/productos(orden='fecha_ASC')}">por fecha de publicación</a></li>
-                      <li><a class="dropdown-item" th:href="@{/donacion/productos(orden='cantidad_disponible_DESC')}">por unidades disponible</a></li>
+                      <li><a class="dropdown-item " th:href="@{/donacion/albergue/productos(orden='fecha_ASC')}">por fecha de publicaciï¿½n</a></li>
+                      <li><a class="dropdown-item" th:href="@{/donacion/albergue/productos(orden='cantidad_disponible_DESC')}">por unidades disponible</a></li>
                     </ul>
                   </div>
             </li>
@@ -53,10 +53,10 @@
                                     <h5 class="card-title" th:text="'Categoria: '+${producto.categoria.getNombre()}"></h5>
 
                                     <div>
-                                        <a th:href="@{/donacion/beneficiario/producto/{id}/informacion(id=${producto.id})}"  id="btn-card"   class="btn btn-outline-secondary rounded-pill">Informacion</a>
+                                        <a th:href="@{/donacion/albergue/producto/{id}/informacion(id=${producto.id})}"  id="btn-card"   class="btn btn-outline-secondary rounded-pill">Informacion</a>
                                     </div>
                                     <div>
-                                        <a th:href="@{/donacion/beneficiario/producto/agregar/{id} (id=${producto.id})}" id="btn-card2" class="btn btn-outline-primary rounded-pill">Agregar a la canasta de donacion</a>
+                                        <a th:href="@{/donacion/albergue/producto/agregar/{id} (id=${producto.id})}" id="btn-card2" class="btn btn-outline-primary rounded-pill">Agregar a la canasta de donacion</a>
                                     </div>
   
                                 </div>
@@ -86,8 +86,8 @@
         <div class="col-lg-6 mx-auto"> 
             <p class="lead mb-4">
                 La aplicacion permite a los usuarios agregar productos, modificar la cantidad de productos en el carrito y eliminar productos del carrito.
-                El proyecto utiliza una base de datos PostgreSQL para almacenar la información de los productos y los clientes.
-                El proyecto se implementó en Java 17 y utiliza Spring Boot para el desarrollo de la capa de presentación, el acceso a datos, seguridad y el monitoreo de la aplicación.
+                El proyecto utiliza una base de datos PostgreSQL para almacenar la informaciï¿½n de los productos y los clientes.
+                El proyecto se implementï¿½ en Java 17 y utiliza Spring Boot para el desarrollo de la capa de presentaciï¿½n, el acceso a datos, seguridad y el monitoreo de la aplicaciï¿½n.
             </p> 
         </div> 
     </div>
