@@ -60,6 +60,10 @@ public class AlbergueService {
 
         return albergueRepository.findAll(pageable);
     }
+
+    public void updateAlbergue(Albergue albergue) {
+        albergueRepository.save(albergue);  // Guardar o actualizar el albergue
+    }
     
     
 }

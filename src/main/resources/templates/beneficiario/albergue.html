@@ -3,6 +3,8 @@
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/comprador/carrito.css}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <meta charset="UTF-8">
   <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.umd.min.js"></script>
@@ -26,7 +28,7 @@
       margin-right: 10px;
     }
     #map {
-      width: 50%;
+      width: 100%;
       height: 60vh;
       border-radius: 4px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -87,12 +89,34 @@
     </style>
 </head>
 <body>
-    <h1 th:text="${albergue.nombre}"></h1>
-    <img th:src="@{${albergue.imagen}}" alt="Imagen del Albergue" style="width:300px;height:200px;">
-    <p><b>Direcci贸n:</b> <span th:text="${albergue.direccion}"></span></p>
-    <p><b>Capacidad:</b> <span th:text="${albergue.capacidad} + ' personas'"></span></p>
-    <p><b>Capacidad:</b> <span th:text="${albergue.descripcion}"></span></p>
-    <div id="map"></div>
+<header th:insert="~{/beneficiario/headeralbergue.html::header}" > </header>
+
+	<main role="main">
+        <div class="container mt-4">
+         <form th:action="@{/updateAlbergue}" th:object="${albergue}" method="post">
+        <div class="card">
+            <img th:src="@{${albergue.imagen}}" class="card-img-top" alt="Imagen del Albergue">
+            <div class="card-body">
+                <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre del Albergue">
+                <textarea class="form-control" th:field="*{descripcion}" placeholder="Descripción del Albergue"></textarea>
+                  <input type="email" th:field="*{email}" class="form-control" placeholder="Correo">
+                        <input type="text" th:field="*{telefono}" class="form-control" placeholder="Teléfono">
+                        <input type="number" th:field="*{capacidad}" class="form-control" placeholder="Cantidad de Habitaciones">
+                        <input type="text" th:field="*{longitud}" class="form-control" placeholder="Longitud">
+                        <input type="text" th:field="*{latitud}" class="form-control" placeholder="Latitud">
+                        <div class="button-container">
+                            <button type="submit" class="submit-button">Guardar Cambios</button>
+                        </div>
+<!--                <ul class="list-group list-group-flush">-->
+<!--                    <li class="list-group-item" th:text="'Correo: ' + ${albergue.email}">Correo</li>-->
+<!--                    <li class="list-group-item" th:text="'Teléfono: ' + ${albergue.telefono}">Teléfono</li>-->
+<!--                    <li class="list-group-item" th:text="'Cantidad de Habitaciones: ' + ${albergue.capacidad}">Cantidad de Habitaciones</li>-->
+<!--                </ul>-->
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
 
               maptilersdk.config.apiKey = 'r3NiLHgrItLbXSqA7eh4';
@@ -122,5 +146,7 @@
                 alert('Geolocalizacion no es soportada en este navegador.');
               }
     </script>
+    </main>
+
 </body>
 </html>

@@ -101,7 +101,7 @@
       </div>
 
       <div class="card-body">
-        <a th:href="@{/donacion/principal}"><button type="button" class="btn btn-outline-primary">Ver mas donaciones</button></a>
+        <a th:href="@{/donacion/albergue/principal}"><button type="button" class="btn btn-outline-primary">Ver mas donaciones</button></a>
 
 
         <div th:if="${msj !=null }" class="alert alert-success alert-dismissible fade show" id="msj" role="alert">
@@ -138,13 +138,13 @@
             <td th:text="${productoCarrito.productoStock.fechaDeVencimiento}"></td>
             <td th:text="${productoCarrito.cantidadSeleccionada}"></td>
             <td>
-              <a th:href="@{/donacion/alberge/elcarrito/actualizar/{id} (id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-success">Actualizar</button></a>
+              <a th:href="@{/donacion/albergue/elcarrito/actualizar/{id} (id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-success">Actualizar</button></a>
             </td>
             <td >
-              <a  th:href="@{/donacion/alberge/elcarrito/{id}/eliminar(id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-danger" >Eliminar</button></a>
+              <a  th:href="@{/donacion/albergue/elcarrito/{id}/eliminar(id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-danger" >Eliminar</button></a>
             </td>
             <td >
-              <a th:href="@{/donacion/alberge/producto/{id}/informacion (id=${productoCarrito.productoStock.id})}" ><button type="button" class="btn btn-outline-warning">Informacion</button></a>
+              <a th:href="@{/donacion/albergue/producto/{id}/informacion (id=${productoCarrito.productoStock.id})}" ><button type="button" class="btn btn-outline-warning">Informacion</button></a>
             </td>
           </tr>
           </tbody>
