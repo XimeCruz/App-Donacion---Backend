@@ -9,12 +9,6 @@ VALUES
     (9, 'Admin', 'Admin', 'Admin@gmail.com', '$2a$10$zfHAlRP5PqQLFewPFxDyNO1bTGgOE98OAIPEkoLK4/6HJgDytRRl6', 1, '3148918702', '2004-03-04', 2),
     (10, 'Mateo josue Rodriguez Chico', 'Mateo', 'mateo204r@gmail.com', '$2a$10$zfHAlRP5PqQLFewPFxDyNO1bTGgOE98OAIPEkoLK4/6HJgDytRRl6', 1, '3148918702', '2004-03-04', 1);
 
-INSERT INTO public.producto_carrito (id, id_producto_stock, id_beneficiario, "cantidad seleccionada", "fecha de agregado")
-VALUES
-    (5, 10, 10, 1, '2023-09-12 00:00:00'),
-    (7, 113, 10, 1, '2023-09-12 00:00:00'),
-    (8, 136, 10, 3, '2023-09-12 00:00:00'),
-    (9, 114, 10, 3, '2023-09-12 00:00:00');
 
 INSERT INTO public.categoria (id, nombre, descripcion)
 VALUES
@@ -24,6 +18,69 @@ VALUES
     (4, 'productos lacteos', 'Productos lácteos variados'),
     (5, 'proteinas', 'Fuentes de proteína animal y vegetal'),
     (6, 'otros', 'Otros productos diversos');
+
+
+
+
+INSERT INTO public.organizacion (id, area_servicio, nombre_org, tipo_alimento, tipo_org, ubicacion)
+VALUES (1, 'Huerfanos', 'Aldeas Infantiles', 'de tood tipo', 'SIN FINES DE LUCRO', 'AV.olmos');
+
+
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (7, 'Zanahoria fresca y crujiente', '2024-04-18', null, 'Zanahoria', 1, 50, 1, 10, '/images/zanahoria.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (9, 'Pepino fresco de campo', '2024-04-18', null, 'Pepino', 1, 60, 1, 10, '/images/pepino.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (8, 'Espinacas orgánicas', '2024-04-18', null, 'Espinaca', 1, 40, 1, 10, '/images/espinaca.jpeg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (11, 'Pimiento rojo crujiente', '2024-04-18', null, 'Pimiento', 1, 45, 1, 10, '/images/pimiento.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (10, 'Brócoli verde y nutritivo', '2024-04-18', null, 'Brócoli', 1, 30, 1, 10, '/images/brocoli.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (24, 'Mantequilla cremosa', '2024-04-18', null, 'Mantequilla', 2, 50, 4, 10, '/images/mantequilla.jpeg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (22, 'Yogur natural sin azúcar', '2024-04-18', null, 'Yogur', 1.5, 40, 4, 10, '/images/yogurt.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (12, 'Plátano maduro y dulce', '2024-04-18', null, 'Plátano', 1, 70, 2, 10, '/images/platanos.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (14, 'Uvas moradas sin semillas', '2024-04-18', null, 'Uva', 3, 40, 2, 10, '/images/uva.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (18, 'Avena integral en hojuelas', '2024-04-18', null, 'Avena', 2.5, 80, 3, 10, '/images/avena.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (15, 'Fresas rojas y jugosas', '2024-04-18', null, 'Fresa', 2.5, 55, 2, 10, '/images/fresa.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (27, 'Filete de salmón fresco', '2024-04-18', null, 'Salmón', 8, 20, 5, 10, '/images/salmon.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (23, 'Queso Cheddar en lonchas', '2024-04-18', null, 'Queso Cheddar', 3, 30, 4, 10, '/images/queso.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (26, 'Yogur griego natural sin grasa', '2024-04-18', null, 'Yogur Griego', 2, 35, 4, 10, '/images/yogurt2.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (19, 'Lentejas secas y nutritivas', '2024-04-18', null, 'Lentejas', 3.5, 60, 3, 10, '/images/lenteja.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (16, 'Mango maduro de temporada', '2024-04-18', null, 'Mango', 2, 45, 2, 10, '/images/mango.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (13, 'Naranjas frescas recién recolectadas', '2024-04-18', null, 'Naranja', 1.2, 60, 2, 10, '/images/naranja.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (17, 'Quinoa orgánica de alta calidad', '2024-04-18', null, 'Quinoa', 4, 25, 3, 10, '/images/quinua.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (20, 'Arroz integral de grano largo', '2024-04-18', null, 'Arroz Integral', 2, 70, 3, 10, '/images/arroz.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (25, 'Leche de almendras sin azúcar', '2024-04-18', null, 'Leche de Almendras', 2.5, 45, 4, 10, '/images/leche.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (21, 'Garbanzos secos de alta calidad', '2024-04-18', null, 'Garbanzos', 3, 50, 3, 10, '/images/garbanzo.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (29, 'Tofu orgánico extrafirme', '2024-04-18', null, 'Tofu', 2.5, 40, 5, 10, '/images/tofu.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (34, 'Cepillo de dientes suave', '2024-04-18', null, 'Cepillo de Dientes', 1.5, 70, 6, 10, '/images/cepillo.png');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (36, 'Rollo de papel aluminio resistente', '2024-04-18', null, 'Papel Aluminio', 2, 90, 6, 10, '/images/aluminio.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (32, 'Rollo de papel higiénico suave', '2024-04-18', null, 'Papel Higiénico', 1.2, 100, 6, 10, '/images/higienico.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (31, 'Pechuga de pavo sin hueso', '2024-04-18', null, 'Pechuga de Pavo', 6, 25, 5, 10, '/images/pechuga.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (30, 'Filete de carne de res magra', '2024-04-18', null, 'Carne de Res', 10, 15, 5, 10, '/images/carne.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (28, 'Docena de huevos orgánicos', '2024-04-18', null, 'Huevos', 3, 50, 5, 10, '/images/huevos.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (35, 'Shampoo revitalizante para cabello', '2024-04-18', null, 'Shampoo', 4, 60, 6, 10, '/images/shampoo.jpg');
+INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (33, 'Detergente líquido para ropa', '2024-04-18', null, 'Detergente', 3, 80, 6, 10, '/images/detergente.jpg');
+
+
+INSERT INTO public.donacion (id,cantidad, fecha_adquisicion, hora_adquisicion, donante_id, organizacion_id, producto_id, voluntario_id)
+VALUES
+    (1,7, '2024-04-18', '09:30:00', 10, 1, 7, 9),
+    (2,25, '2024-04-18', '10:15:00', 10, 1, 8, 9),
+    (3,77, '2024-04-18', '11:00:00', 10, 1, 9, 9),
+    (4,46, '2024-04-18', '12:30:00', 10, 1, 10, 9),
+    (5,33, '2024-04-18', '14:45:00', 10, 1, 11, 9),
+    (6,14, '2024-04-18', '15:20:00', 10, 1, 12, 9),
+    (7,11, '2024-04-18', '16:10:00', 10, 1, 13, 9),
+    (8,68, '2024-04-18', '17:00:00', 10, 1, 14, 9),
+    (9,50, '2024-04-18', '18:20:00', 10, 1, 15, 9),
+    (10,92, '2024-04-18', '19:45:00', 10, 1, 16, 9);
+
+
+
+
+INSERT INTO public.producto_carrito (id, id_producto_stock, id_beneficiario, "cantidad seleccionada", "fecha de agregado")
+VALUES
+    (5, 10, 10, 1, '2023-09-12 00:00:00'),
+    (7, 113, 10, 1, '2023-09-12 00:00:00'),
+    (8, 136, 10, 3, '2023-09-12 00:00:00'),
+    (9, 114, 10, 3, '2023-09-12 00:00:00');
+
 
 INSERT INTO public.productos_stock (id, nombre, descripcion, id_categoria, precio, cantidad_disponible, id_donante, fecha_publicacion)
 VALUES
@@ -75,61 +132,5 @@ VALUES
     (34, 'Cepillo de Dientes', 'Cepillo de dientes suave', 6, 1.5, 70, 10, '2024-04-18'),
     (35, 'Shampoo', 'Shampoo revitalizante para cabello', 6, 4, 60, 10, '2024-04-18'),
     (36, 'Papel Aluminio', 'Rollo de papel aluminio resistente', 6, 2, 90, 10, '2024-04-18');
-
-
-INSERT INTO public.organizacion (id, area_servicio, nombre_org, tipo_alimento, tipo_org, ubicacion)
-VALUES (1, 'Huerfanos', 'Aldeas Infantiles', 'de tood tipo', 'SIN FINES DE LUCRO', 'AV.olmos');
-
-
-INSERT INTO public.donacion (id,cantidad, fecha_adquisicion, hora_adquisicion, donante_id, organizacion_id, producto_id, voluntario_id)
-VALUES
-    (1,7, '2024-04-18', '09:30:00', 10, 1, 7, 9),
-    (2,25, '2024-04-18', '10:15:00', 10, 1, 8, 9),
-    (3,77, '2024-04-18', '11:00:00', 10, 1, 9, 9),
-    (4,46, '2024-04-18', '12:30:00', 10, 1, 10, 9),
-    (5,33, '2024-04-18', '14:45:00', 10, 1, 11, 9),
-    (6,14, '2024-04-18', '15:20:00', 10, 1, 12, 9),
-    (7,11, '2024-04-18', '16:10:00', 10, 1, 13, 9),
-    (8,68, '2024-04-18', '17:00:00', 10, 1, 14, 9),
-    (9,50, '2024-04-18', '18:20:00', 10, 1, 15, 9),
-    (10,92, '2024-04-18', '19:45:00', 10, 1, 16, 9);
-
-
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (7, 'Zanahoria fresca y crujiente', '2024-04-18', null, 'Zanahoria', 1, 50, 1, 10, '/images/zanahoria.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (9, 'Pepino fresco de campo', '2024-04-18', null, 'Pepino', 1, 60, 1, 10, '/images/pepino.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (8, 'Espinacas orgánicas', '2024-04-18', null, 'Espinaca', 1, 40, 1, 10, '/images/espinaca.jpeg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (11, 'Pimiento rojo crujiente', '2024-04-18', null, 'Pimiento', 1, 45, 1, 10, '/images/pimiento.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (10, 'Brócoli verde y nutritivo', '2024-04-18', null, 'Brócoli', 1, 30, 1, 10, '/images/brocoli.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (24, 'Mantequilla cremosa', '2024-04-18', null, 'Mantequilla', 2, 50, 4, 10, '/images/mantequilla.jpeg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (22, 'Yogur natural sin azúcar', '2024-04-18', null, 'Yogur', 1.5, 40, 4, 10, '/images/yogurt.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (12, 'Plátano maduro y dulce', '2024-04-18', null, 'Plátano', 1, 70, 2, 10, '/images/platanos.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (14, 'Uvas moradas sin semillas', '2024-04-18', null, 'Uva', 3, 40, 2, 10, '/images/uva.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (18, 'Avena integral en hojuelas', '2024-04-18', null, 'Avena', 2.5, 80, 3, 10, '/images/avena.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (15, 'Fresas rojas y jugosas', '2024-04-18', null, 'Fresa', 2.5, 55, 2, 10, '/images/fresa.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (27, 'Filete de salmón fresco', '2024-04-18', null, 'Salmón', 8, 20, 5, 10, '/images/salmon.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (23, 'Queso Cheddar en lonchas', '2024-04-18', null, 'Queso Cheddar', 3, 30, 4, 10, '/images/queso.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (26, 'Yogur griego natural sin grasa', '2024-04-18', null, 'Yogur Griego', 2, 35, 4, 10, '/images/yogurt2.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (19, 'Lentejas secas y nutritivas', '2024-04-18', null, 'Lentejas', 3.5, 60, 3, 10, '/images/lenteja.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (16, 'Mango maduro de temporada', '2024-04-18', null, 'Mango', 2, 45, 2, 10, '/images/mango.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (13, 'Naranjas frescas recién recolectadas', '2024-04-18', null, 'Naranja', 1.2, 60, 2, 10, '/images/naranja.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (17, 'Quinoa orgánica de alta calidad', '2024-04-18', null, 'Quinoa', 4, 25, 3, 10, '/images/quinua.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (20, 'Arroz integral de grano largo', '2024-04-18', null, 'Arroz Integral', 2, 70, 3, 10, '/images/arroz.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (25, 'Leche de almendras sin azúcar', '2024-04-18', null, 'Leche de Almendras', 2.5, 45, 4, 10, '/images/leche.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (21, 'Garbanzos secos de alta calidad', '2024-04-18', null, 'Garbanzos', 3, 50, 3, 10, '/images/garbanzo.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (29, 'Tofu orgánico extrafirme', '2024-04-18', null, 'Tofu', 2.5, 40, 5, 10, '/images/tofu.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (34, 'Cepillo de dientes suave', '2024-04-18', null, 'Cepillo de Dientes', 1.5, 70, 6, 10, '/images/cepillo.png');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (36, 'Rollo de papel aluminio resistente', '2024-04-18', null, 'Papel Aluminio', 2, 90, 6, 10, '/images/aluminio.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (32, 'Rollo de papel higiénico suave', '2024-04-18', null, 'Papel Higiénico', 1.2, 100, 6, 10, '/images/higienico.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (31, 'Pechuga de pavo sin hueso', '2024-04-18', null, 'Pechuga de Pavo', 6, 25, 5, 10, '/images/pechuga.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (30, 'Filete de carne de res magra', '2024-04-18', null, 'Carne de Res', 10, 15, 5, 10, '/images/carne.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (28, 'Docena de huevos orgánicos', '2024-04-18', null, 'Huevos', 3, 50, 5, 10, '/images/huevos.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (35, 'Shampoo revitalizante para cabello', '2024-04-18', null, 'Shampoo', 4, 60, 6, 10, '/images/shampoo.jpg');
-INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, precio, cantidad_disponible, id_categoria, id_donante, imagen) VALUES (33, 'Detergente líquido para ropa', '2024-04-18', null, 'Detergente', 3, 80, 6, 10, '/images/detergente.jpg');
-
-
-
-
-
-
 
 
