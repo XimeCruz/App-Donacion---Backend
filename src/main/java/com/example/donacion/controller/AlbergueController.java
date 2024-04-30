@@ -1,5 +1,6 @@
 package com.example.donacion.controller;
 
+import com.example.donacion.model.Albergue;
 import com.example.donacion.model.Donacion;
 import com.example.donacion.model.Notificacion;
 import com.example.donacion.model.ProductoStock;
@@ -115,4 +116,25 @@ public class AlbergueController {
         }
         return null;
     }
+
+    @GetMapping("/albergue")
+    public String getAlbergue(Model model) {
+        Albergue albergue = new Albergue();
+        // Supongamos que estos son valores de ejemplo
+        albergue.setNombre("Albergue Esperanza");
+        albergue.setDireccion("123 Calle Ficticia, Ciudad");
+        albergue.setTelefono("123-456-7890");
+        albergue.setEmail("contacto@albergue.esperanza.org");
+        albergue.setImagen("ruta/a/imagen.jpg");
+        albergue.setLatitud(-34.397);
+        albergue.setLongitud(150.644);
+        albergue.setCapacidad(100);
+
+        model.addAttribute("albergue", albergue);
+        model.addAttribute("googleApiKey", "AIzaSyBhsyuaCu5aBp_kqkkXvTYAdFXFzfHJgug");
+
+        return "beneficiario/albergue";
+    }
+
+
 }

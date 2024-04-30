@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${albergue.nombre}"></title>
+    <script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleApiKey} + '&callback=initMap'"></script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function initMap() {
+            var location = {lat: [[${albergue.latitud}]], lng: [[${albergue.longitud}]]};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: location
+            });
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1 th:text="${albergue.nombre}"></h1>
+    <img th:src="@{${albergue.imagen}}" alt="Imagen del Albergue" style="width:300px;height:200px;">
+    <p><b>Dirección:</b> <span th:text="${albergue.direccion}"></span></p>
+    <p><b>Teléfono:</b> <span th:text="${albergue.telefono}"></span></p>
+    <p><b>Email:</b> <span th:text="${albergue.email}"></span></p>
+    <p><b>Capacidad:</b> <span th:text="${albergue.capacidad} + ' personas'"></span></p>
+    <div id="map"></div>
+</body>
+</html>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--  <head>-->
+<!--    <title>Simple Map</title>-->
+<!--    <meta name="viewport" content="initial-scale=1.0">-->
+<!--    <meta charset="utf-8">-->
+<!--    <style>-->
+<!--      /* Always set the map height explicitly to define the size of the div-->
+<!--       * element that contains the map. */-->
+<!--      #map {-->
+<!--        height: 100%;-->
+<!--      }-->
+<!--      /* Optional: Makes the sample page fill the window. */-->
+<!--      html, body {-->
+<!--        height: 100%;-->
+<!--        margin: 0;-->
+<!--        padding: 0;-->
+<!--      }-->
+<!--    </style>-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    <div id="map"></div>-->
+<!--    <script>-->
+<!--      var map;-->
+<!--      function initMap() {-->
+<!--        map = new google.maps.Map(document.getElementById('map'), {-->
+<!--          center: {lat: -34.397, lng: 150.644},-->
+<!--          zoom: 8-->
+<!--        });-->
+<!--      }-->
+<!--    </script>-->
+<!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhsyuaCu5aBp_kqkkXvTYAdFXFzfHJgug"-->
+<!--    async defer></script>-->
+<!--  </body>-->
+<!--</html>-->
