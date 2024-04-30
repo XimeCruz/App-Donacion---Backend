@@ -63,7 +63,7 @@ public class AlbergueController {
         model.addAttribute("productos", productos);
         model.addAttribute("isPageable", true);
 
-        return "principal/albergue";
+        return "beneficiario/principal";
     }
 
     /**
