@@ -16,7 +16,7 @@
         <br>
         <div th:if="${notification != null}" class="alert alert-primary alert-dismissible fade show" role="alert">
             &iexcl;Producto pr&oacuteximo a vencer en una semana!
-            <p th:text="'Producto: '+${notification.producto.nombre}"></p>
+            <p th:text="'Albergue: '+${notification.producto.nombre}"></p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
           
@@ -27,20 +27,21 @@
             <div class="card-body">
                 <div class="container mt-4">
                     <div class="row">
-                        <div th:each="producto: ${productos}" class="col-md-3 mb-4">
+                        <div th:each="albergue: ${albergues}" class="col-md-3 mb-4">
                             <div class="card" id="tarjeta"  >
                                 <div class="card-header" id="header-producto">
 
-                                    <img id="imgproducto" th:src="@{${producto.imagen}}" class="card-img-top"  >
+                                    <img id="imgproducto" th:src="@{${albergue.imagen}}" class="card-img-top"  >
                                 </div>
                               
                                 <div class="card-body">
-                                    <h5 class="card-title" id="nombre-producto" th:text="${producto.nombre}"></h5>
-                                    <!--h5 class="card-title" th:text="'Bs. '+${producto.precio}"></h5-->
-                                    <h5 class="card-title" th:text="'Categoria: '+${producto.categoria.getNombre()}"></h5>
+                                    <h5 class="card-title" id="nombre-producto" th:text="${albergue.nombre}"></h5>
+                                    <h5 class="card-title" th:text="'Telefono: '+${albergue.telefono}"></h5>
+                                    <h5 class="card-title" th:text="'Direccion: '+${albergue.direccion}"></h5>
+                                    <h5 class="card-title" th:text="'Capacidad: '+${albergue.capacidad}"></h5>
 
                                     <div>
-                                        <a th:href="@{/donacion/beneficiario/producto/{id}/informacion(id=${producto.id})}"  id="btn-card"   class="btn btn-outline-secondary rounded-pill">Informacion</a>
+                                        <a th:href="@{/donacion/voluntario/{id}/informacion(id=${albergue.id})}"  id="btn-card"   class="btn btn-outline-secondary rounded-pill">Informacion</a>
                                     </div>
                                 </div>
                             </div>
@@ -48,16 +49,16 @@
                     </div>
                 </div>
                 <nav th:if="${ ispageable==true}" aria-label="Page navigation example" >
-                    <ul th:if="${productos.totalPages > 0}" class="pagination justify-content-center">
-                        <li class="page-item" th:classappend="${productos.number == 0 ? 'disabled' : ''}">
-                            <a th:href="@{/donacion/principal(page=${productos.number - 1})}" class="page-link">Anterior</a>
+                    <ul th:if="${albergues.totalPages > 0}" class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${albergues.number == 0 ? 'disabled' : ''}">
+                            <a th:href="@{/donacion/voluntario/principal(page=${albergues.number - 1})}" class="page-link">Anterior</a>
                         </li>
                                     
-                        <li class="page-item" th:classappend="${i eq productos.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, productos.totalPages, 1)}">
-                            <a class="page-link" th:href="@{/donacion/principal?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+                        <li class="page-item" th:classappend="${i eq albergues.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, albergues.totalPages, 1)}">
+                            <a class="page-link" th:href="@{/donacion/voluntario/principal?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
                         </li>
-                        <li class="page-item" th:classappend="${productos.number == (productos.totalPages - 1) ? 'disabled' : ''}">
-                            <a th:href="@{/donacion/principal(page=${productos.number + 1})}" class="page-link">Siguiente</a>
+                        <li class="page-item" th:classappend="${albergues.number == (albergues.totalPages - 1) ? 'disabled' : ''}">
+                            <a th:href="@{/donacion/voluntario/principal(page=${albergues.number + 1})}" class="page-link">Siguiente</a>
                         </li>
                     </ul>
                 </nav>

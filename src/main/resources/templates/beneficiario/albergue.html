@@ -89,35 +89,26 @@
 <body>
     <h1 th:text="${albergue.nombre}"></h1>
     <img th:src="@{${albergue.imagen}}" alt="Imagen del Albergue" style="width:300px;height:200px;">
-    <p><b>Dirección:</b> <span th:text="${albergue.direccion}"></span></p>
+    <p><b>Direcci贸n:</b> <span th:text="${albergue.direccion}"></span></p>
     <p><b>Capacidad:</b> <span th:text="${albergue.capacidad} + ' personas'"></span></p>
+    <p><b>Capacidad:</b> <span th:text="${albergue.descripcion}"></span></p>
     <div id="map"></div>
-<!--    <script>-->
-<!--        var map = new maptiler.Map({-->
-<!--            container: 'map',-->
-<!--            style: 'https://api.maptiler.com/maps/streets/style.json?key=' + [[${apiKey}]],-->
-<!--            center: [${albergue.longitud}, ${albergue.latitud}], // longitud, latitud-->
-<!--            zoom: 12-->
-<!--        });-->
-
-<!--        new maptiler.Marker()-->
-<!--            .setLngLat([${albergue.longitud}, ${albergue.latitud}])-->
-<!--            .addTo(map);-->
-<!--    </script>-->
-
     <script>
+
               maptilersdk.config.apiKey = 'r3NiLHgrItLbXSqA7eh4';
+              const longitud = [[${albergue.longitud}]];
+              const latitud = [[${albergue.latitud}]] ;
               const map = new maptilersdk.Map({
                 container: 'map',
                 style: maptilersdk.MapStyle.STREETS,
-                center: [16.62662018, 49.2125578],
+                center: [longitud,latitud],
                 zoom: 14,
               });
-              var marker = new maptilersdk.Marker().setLngLat([16.62662018, 49.2125578]).addTo(map);
+              var marker = new maptilersdk.Marker().setLngLat([longitud,latitud]).addTo(map);
               map.on('click', function(e) {
                 var latLng = e.lngLat;
                 marker.setLngLat(latLng);
-                document.getElementById('info').textContent = "Ubicación seleccionada: " + latLng.lat + ", " + latLng.lng;
+                document.getElementById('info').textContent = "Ubicacion seleccionada: " + latLng.lat + ", " + latLng.lng;
                 document.getElementById('locationInput').value = latLng.lat + ", " + latLng.lng;
               });
               if (navigator.geolocation) {
@@ -125,10 +116,10 @@
                   var latLng = [position.coords.longitude, position.coords.latitude];
                   map.setCenter(latLng);
                   marker.setLngLat(latLng);
-                  document.getElementById('info').textContent = "Tu ubicación actual: " + latLng[1] + ", " + latLng[0];
+                  document.getElementById('info').textContent = "Tu ubicaci贸n actual: " + latLng[1] + ", " + latLng[0];
                 });
               } else {
-                alert('Geolocalización no es soportada en este navegador.');
+                alert('Geolocalizacion no es soportada en este navegador.');
               }
     </script>
 </body>

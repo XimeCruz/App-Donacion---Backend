@@ -67,4 +67,8 @@ public class NotificacionService {
     public void guardarNotificacion(Notificacion notification) {
         notificacionRepository.save(notification);
     }
+
+    public List<Notificacion> obtenerNotificaciones() {
+        return notificacionRepository.findAll();
+    }
 }

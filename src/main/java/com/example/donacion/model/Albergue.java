@@ -23,4 +23,6 @@ public class Albergue {
     private double latitud;
     private double longitud;
     private Integer capacidad;
+    @Column(length = 4000)
+    private String descripcion;
 }

@@ -1,9 +1,6 @@
 package com.example.donacion.controller;
 
-import com.example.donacion.model.Albergue;
-import com.example.donacion.model.Donacion;
-import com.example.donacion.model.Notificacion;
-import com.example.donacion.model.ProductoStock;
+import com.example.donacion.model.*;
 import com.example.donacion.model.response.DonacionResponse;
 import com.example.donacion.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,6 +21,30 @@ public class VoluntarioController {
 
     @Autowired
     public NotificacionService notificacionService;
+
+
+
+    private final String home="principal/home";
+    private final String logout="principal/logout";
+    private final String vistaprincipal="principal/principal";
+    private final String vistaInformacionProducto="";
+
+    @Autowired
+    private ProductoStockService productoStockServices;
+
+    @Autowired
+    private CategoriaService categoriaServices;
+
+    @Autowired
+    private DonacionService donacionService;
+
+    @Autowired
+    private AlbergueService albergueService;
+
+    @Autowired
+    private ActividadService actividadService;
+
+
     /**
      * devuelve la ubicacion del archivo en el que se encuentra la pagina principal.
      *
@@ -67,17 +86,9 @@ public class VoluntarioController {
     @GetMapping(value ="/principal")
     public String principal(Model model, Pageable page) {
 
-        Page<Albergue> productos = albergueService.getAlbergues(page);
-        model.addAttribute("productos",productos);
+        Page<Albergue> albergues = albergueService.getAlbergues(page);
+        model.addAttribute("albergues",albergues);
         model.addAttribute("ispageable", true);
-
-        Notificacion notification = obtenerNotificacion();
-        if (!(notification == null)) {
-            System.out.println(notification);
-            model.addAttribute("notification", notification);
-        } else {
-            model.addAttribute("notification", null);
-        }
 
 
         return "voluntario/principal";
@@ -135,17 +146,23 @@ public class VoluntarioController {
      * @param model contiene los atributos de las vistas.
      * @return la pagina de detalles de un producto.
      */
-    @GetMapping( value = "/producto/{id}/informacion")
-    public String informaciondelProductoCarrito(@PathVariable("id")Long id, Model model) {
-        Integer idr= 10;
-        ProductoStock productoStock=productoStockServices.getById(idr.longValue());
-        model.addAttribute("productoInfo",productoStock);
-        model.addAttribute("delCarrito", true);
+    @GetMapping( value = "/{id}/informacion")
+    public String informaciondelAlbergue(@PathVariable("id")Long id, Model model) {
 
-        return "vistascompradores/informacionproducto";
+        Albergue albergue=albergueService.getById(id);
+        model.addAttribute("albergueInfo",albergue);
+
+        return "voluntario/informacionalbergue";
     }
 
 
+    @GetMapping( value = "/notificaciones")
+    public String notificaciones( Model model) {
+
+        List<Notificacion> notificaciones = notificacionService.obtenerNotificaciones();
+        model.addAttribute("notificaciones", notificaciones);
+        return "voluntario/notificaciones";
+    }
 
     /**
      * Contiene algunos atributos necesarios para las vistas.
@@ -161,22 +178,22 @@ public class VoluntarioController {
 
 
 
-    private final String home="principal/home";
-    private final String logout="principal/logout";
-    private final String vistaprincipal="principal/principal";
-    private final String vistaInformacionProducto="";
 
-    @Autowired
-    private ProductoStockService productoStockServices;
+     @GetMapping("/actividades")
+    public String showAllActivities(Model model) {
+        model.addAttribute("activities", actividadService.findAll());
+        return "voluntario/actividades";
+    }
 
-    @Autowired
-    private CategoriaService categoriaServices;
-
-    @Autowired
-    private DonacionService donacionService;
-
-    @Autowired
-    private AlbergueService albergueService;
+    @PostMapping("/anadir-actividad")
+    public String addActivity(Actividad activity, Model model) {
+        Actividad nuevaActividad = new Actividad();
+        nuevaActividad.setFecha(new Date());
+        nuevaActividad.setNombreProducto("Arroz");
+        nuevaActividad.setCantidad(2);
+        actividadService.save(nuevaActividad);
+        return "redirect:/donacion/voluntario/actividades";
+    }
 
 
 

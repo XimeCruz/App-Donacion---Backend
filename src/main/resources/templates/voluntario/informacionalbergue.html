@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/css/comprador/detalles.css}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title th:text="${albergueInfo.nombre} + ' | Información de Albergue'">Donacion | Informacion de albergues</title>
+<script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.umd.min.js"></script>
+<link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.css" rel="stylesheet" />
+<style>
+    #map {
+        width: 100%;
+        height: 400px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+    <header th:insert="~{/voluntario/headervoluntario.html::header}" ></header>
+
+    <main role="main">
+
+        <div class="container">
+            <div class="card" id="card_principal">
+                <div class="card-header">
+                    <h3 class="h3">Información sobre este albergue</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3" id="div-img">
+                            <img th:src="@{${albergueInfo.imagen}}" alt="Imagen del Albergue" style="height:310px; width:310px;">
+                        </div>
+                        <div class="col-md-9">
+                            <h6 id="titulo" class="card-title h4" th:text="${albergueInfo.nombre}"></h6>
+                            <p id="parrafo" th:text="'Teléfono: ' + ${albergueInfo.telefono}"></p>
+                            <p id="parrafo" th:text="'Dirección: ' + ${albergueInfo.direccion}"></p>
+                            <p id="parrafo" >
+                                <strong class="h6">Capacidad total: </strong>
+                                <span class="txt-normal" th:text="${albergueInfo.capacidad} + ' personas'"></span>
+                            </p>
+							<p id="parrafo" >
+                                <strong class="h6">Email: </strong>
+                                <span class="txt-normal" th:text="${albergueInfo.email}"></span>
+                            </p>
+
+                            <hr style="color: white;">
+							<p id="parrafo" th:text="${albergueInfo.descripcion}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mapa del Albergue -->
+            <div id="map"></div>
+            <script th:inline="javascript">
+
+                maptilersdk.config.apiKey = 'r3NiLHgrItLbXSqA7eh4';
+                const longitud = [[${albergueInfo.longitud}]];
+              const latitud = [[${albergueInfo.latitud}]] ;
+              const map = new maptilersdk.Map({
+                container: 'map',
+                style: maptilersdk.MapStyle.STREETS,
+                center: [longitud,latitud],
+                zoom: 14,
+              });
+                var marker = new maptilersdk.Marker().setLngLat([longitud,latitud]).addTo(map);
+
+            </script>
+        </div>
+
+    </main>
+
+<br>
+<footer th:insert="~{/fragmentos/footertiendafijo.html::footer-tienda}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
