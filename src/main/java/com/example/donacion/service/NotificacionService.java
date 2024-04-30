@@ -63,4 +63,8 @@ public class NotificacionService {
         }
         return null;
     }
+
+    public void guardarNotificacion(Notificacion notification) {
+        notificacionRepository.save(notification);
+    }
 }

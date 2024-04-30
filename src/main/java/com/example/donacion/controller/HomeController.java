@@ -75,8 +75,12 @@ public class HomeController {
 		model.addAttribute("ispageable", true);
 
 		Notificacion notification = obtenerNotificacion();
+
+
+
 		if (!(notification == null)) {
 			System.out.println(notification);
+			notificacionService.guardarNotificacion(notification);
 			model.addAttribute("notification", notification);
 		} else {
 			model.addAttribute("notification", null);
