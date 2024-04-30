@@ -89,11 +89,12 @@
     </style>
 </head>
 <body>
-<header th:insert="~{/beneficiario/headeralbergue.html::header}" > </header>
+
 
 	<main role="main">
+        <header th:insert="~{/beneficiario/headeralbergue.html::header}" > </header>
         <div class="container mt-4">
-         <form th:action="@{/updateAlbergue}" th:object="${albergue}" method="post">
+         <form th:action="@{/donacion/albergue/updateAlbergue}" th:object="${albergue}" method="post">
         <div class="card">
             <img th:src="@{${albergue.imagen}}" class="card-img-top" alt="Imagen del Albergue">
             <div class="card-body">

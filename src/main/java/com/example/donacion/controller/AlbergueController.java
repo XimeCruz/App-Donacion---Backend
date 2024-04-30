@@ -253,7 +253,7 @@ public class AlbergueController {
                                  @RequestParam("longitud") double longitud,
                                  @RequestParam("latitud") double latitud,
                                  Model model) {
-        Albergue albergue = new Albergue();
+        Albergue albergue = albergueService.getById(1L);
         albergue.setNombre(nombre);
         albergue.setDescripcion(descripcion);
         albergue.setEmail(email);
