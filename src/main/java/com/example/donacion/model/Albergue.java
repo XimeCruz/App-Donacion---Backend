@@ -17,4 +17,10 @@ public class Albergue {
     private String nombre;
     private String direccion;
     private Integer beneficiarioId;
+    private String telefono;
+    private String email;
+    private String imagen;
+    private double latitud;
+    private double longitud;
+    private Integer capacidad;
 }
