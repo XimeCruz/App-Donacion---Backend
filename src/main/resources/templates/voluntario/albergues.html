@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Coordinación de Entrega para Albergues</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141E30;
+            color: #FFFFFF;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #243B55;
+        }
+        th {
+            background-color: #243B55;
+            color: #FFFFFF;
+        }
+        td {
+            background-color: #141E30;
+            color: #FFFFFF;
+        }
+        input[type="submit"] {
+            background-color: #243B55;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .container {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Albergues que necesitan alimentos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Albergue</th>
+                    <th>Dirección</th>
+                    <th>Necesidades</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="albergue : ${albergues}">
+                    <td th:text="${albergue.nombre}">Nombre del Albergue</td>
+                    <td th:text="${albergue.direccion}">Dirección</td>
+                    <td th:text="${albergue.necesidades}">Lista de necesidades</td>
+                    <td>
+                        <form th:action="@{/coordinarEntrega(albergueId=${albergue.id})}" method="post">
+                            <input type="hidden" name="voluntarioId" th:value="${voluntario.id}">
+                            <input type="submit" value="Coordinar Entrega">
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
