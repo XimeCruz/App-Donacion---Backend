@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul style="margin-top: 20px;">
+                <li>
+                    <a href="#">
+                        <span class="title">
+                            <img src="assets/imgs/logo.svg" alt="">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-section="dashboard">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-section="solicitudes">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Solicitudes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-section="donaciones">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Donaciones</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-section="voluntarios">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Realizar entrega</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-section="settings">
+                        <span class="icon">
+                            <ion-icon name="create-outline"></ion-icon>
+                        </span>
+                        <span class="title">Recepcionar</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Buscar">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Sección de Dashboard -->
+            <div class="section" id="dashboard">
+                <div class="cardBox">
+                    <div class="card">
+                        <div>
+                            <div class="numbers">10</div>
+                            <div class="cardName">Donadores</div>
+                        </div>
+                        <div class="iconBx">
+                            <ion-icon name="cart-outline"></ion-icon>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">10</div>
+                            <div class="cardName">Voluntarios</div>
+                        </div>
+                        <div class="iconBx">
+                            <i class='bx bx-donate-heart'></i>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">11</div>
+                            <div class="cardName">Solicitudes</div>
+                        </div>
+                        <div class="iconBx">
+                            <ion-icon name="chatbubbles-outline"></ion-icon>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div>
+                            <div class="numbers">+5% </div>
+                            <div class="cardName"> Variación de Productos este mes</div>
+                        </div>
+                        <div class="iconBx">
+                            <ion-icon name="trending-up-outline"></ion-icon>
+                        </div>
+                    </div>
+
+                    <!-- <div class="card">
+                        <div>
+                            <div class="numbers">15</div>
+                            <div class="cardName"> Unidades de Productos próximos a vencer</div>
+                        </div>
+                        <div class="iconBx">
+                            <ion-icon name="alert-circle-outline"></ion-icon>
+                        </div>
+                    </div> -->
+                </div>
+
+                <!-- Aquí comienza la inserción de los gráficos -->
+                <div class="chart-container" style="margin-top: 20px;">
+                    <div id="productPieChart" style="width: 100%; height: 400px;"></div>
+                    <div id="productAreaChart" style="width: 100%; height: 400px;"></div>
+                </div>
+                <script>
+                    // Gráfico de Pie
+                    Highcharts.chart('productPieChart', {
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'pie'
+                        },
+                        title: {
+                            text: 'Distribución de Productos por Categoría'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Productos',
+                            colorByPoint: true,
+                            data: [{
+                                name: 'Vegetales',
+                                y: 60,
+                                sliced: true,
+                                selected: true
+                            }, {
+                                name: 'Frutas',
+                                y: 45
+                            }, {
+                                name: 'Lácteos',
+                                y: 30
+                            }, {
+                                name: 'Carnes',
+                                y: 15
+                            }]
+                        }]
+                    });
+
+                    // Gráfico de Áreas Apiladas
+                    Highcharts.chart('productAreaChart', {
+                        chart: {
+                            type: 'area'
+                        },
+                        title: {
+                            text: 'Actividad de Productos por Hora del Día'
+                        },
+                        xAxis: {
+                            categories: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
+                            tickmarkPlacement: 'on',
+                            title: {
+                                enabled: false
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Cantidad'
+                            },
+                            labels: {
+                                formatter: function () {
+                                    return this.value;
+                                }
+                            }
+                        },
+                        tooltip: {
+                            split: true,
+                            valueSuffix: ' unidades'
+                        },
+                        plotOptions: {
+                            area: {
+                                stacking: 'normal',
+                                lineColor: '#666666',
+                                lineWidth: 1,
+                                marker: {
+                                    lineWidth: 1,
+                                    lineColor: '#666666'
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Vegetales',
+                            data: [300, 400, 300, 500, 400, 300, 500, 400]
+                        }, {
+                            name: 'Frutas',
+                            data: [100, 100, 80, 120, 150, 100, 120, 100]
+                        }, {
+                            name: 'Lácteos',
+                            data: [200, 200, 175, 200, 180, 200, 180, 190]
+                        }, {
+                            name: 'Carnes',
+                            data: [50, 30, 50, 50, 50, 50, 30, 60]
+                        }]
+                    });
+                </script>
+            </div>
+
+            <!-- Sección de Solicitudes -->
+
+            <div class="section" id="solicitudes" style="display: none;">
+                <!-- Contenido de la sección de Solicitudes -->
+                <div class="details">
+                    <div class="recentOrders">
+                        <div class="cardHeader">
+                            <h2>Solicitudes</h2>
+                            <!-- <a href="#" class="btn">View All</a> -->
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Nombre de organización</td>
+                                    <td>Fecha Adquisición</td>
+                                    <td>Dirección</td>
+                                    <td>Motivo</td>
+                                    <td>Estado</td>
+                                    <td>Acción</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Aldeas Infantiles</td>
+                                    <td>2024-04-18</td>
+                                    <td>AV.olmos</td>
+                                    <td>Necesitamos recursos </td>
+                                    <td><span class="status delivered">Aceptado</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Fundación Manos Unidas</td>
+                                    <td>2024-04-18</td>
+                                    <td>Calle 6 de Agosto #123</td>
+                                    <td>Requerimos estos productos con urgencia </td>
+                                    <td><span class="status pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-check-circle"
+                                                aria-hidden="true"></i></button>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                        <button class="icon-btn"><i class="fa fa-times-circle"
+                                                aria-hidden="true"></i></button>
+                                    </td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <td>Casa del Abuelo</td>
+                                    <td>2024-04-20</td>
+                                    <td>Av. Arce #456</td>
+                                    <td> </td>
+                                    <td><span class="status return">Rechazado</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Fundación Compartir</td>
+                                    <td>2024-04-19</td>
+                                    <td>Calle Murillo #789</td>
+                                    <td>Descripcion4</td>
+                                    <td><span class="status inProgress">En proceso</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sección de Donaciones -->
+            <div class="section" id="donaciones" style="display: none;">
+                <!-- Contenido de la sección de Donaciones -->
+                <!-- ================ Order Details List ================= -->
+                <div class="details">
+                    <div class="recentOrders">
+                        <div class="cardHeader">
+                            <h2>Donaciones</h2>
+                            <!-- <a href="#" class="btn">View All</a> -->
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Nombre de organización</td>
+                                    <td>Fecha Adquisición</td>
+                                    <td>Dirección</td>
+                                    <td>Estado</td>
+                                    <td>Acción</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Aldeas Infantiles</td>
+                                    <td>2024-04-18</td>
+                                    <td>AV.olmos</td>
+                                    <td><span class="status delivered">Aceptado</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Fundación Manos Unidas</td>
+                                    <td>2024-04-18</td>
+                                    <td>Calle 6 de Agosto #123</td>
+                                    <td><span class="status pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-check-circle"
+                                                aria-hidden="true"></i></button>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                        <button class="icon-btn"><i class="fa fa-times-circle"
+                                                aria-hidden="true"></i></button>
+                                    </td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <td>Casa del Abuelo</td>
+                                    <td>2024-04-20</td>
+                                    <td>Av. Arce #456</td>
+                                    <td><span class="status return">Rechazado</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Fundación Compartir</td>
+                                    <td>2024-04-18</td>
+                                    <td>Calle Murillo #789</td>
+                                    <td><span class="status delivered">Aceptado</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Asignar Voluntarios -->
+            <div class="section" id="voluntarios" style="display: none;">
+                <!-- Contenido de la sección de Asignar Voluntarios -->
+                <div class="details">
+                    <div class="recentOrders">
+                        <div class="cardHeader">
+                            <h2>Realizar entrega</h2>
+                            <!-- <a href="#" class="btn">View All</a> -->
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Nombre de organización</td>
+                                    <td>Fecha Adquisición</td>
+                                    <td>Dirección</td>
+                                    <td>Estado</td>
+                                    <td>Acción</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Aldeas Infantiles</td>
+                                    <td>2024-04-18</td>
+                                    <td>AV.olmos</td>
+                                    <td><span class="status delivered">Recibido</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Fundación Manos Unidas</td>
+                                    <td>2024-04-18</td>
+                                    <td>Calle 6 de Agosto #123</td>
+                                    <td><span class="status pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-user-plus"
+                                                aria-hidden="true"></i></i></button>
+                                    </td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <td>Casa del Abuelo</td>
+                                    <td>2024-04-20</td>
+                                    <td>Av. Arce #456</td>
+                                    <td><span class="status pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-user-plus"
+                                                aria-hidden="true"></i></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Fundación Compartir</td>
+                                    <td>2024-04-18</td>
+                                    <td>Calle Murillo #789</td>
+                                    <td><span class="status inProgress">En proceso</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fas fa-check"
+                                                aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="modalVoluntarios" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Asignar Voluntario</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Voluntario</th>
+                                    <th>Seleccionar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Hernán Antonio Pérez García</td>
+                                    <td>
+                                        <input type="checkbox" name="voluntarioSeleccionado"
+                                            value="Hernán Antonio Pérez García">
+                                    </td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <td>Francisco Javier Pérez Martínez</td>
+                                    <td>
+                                        <input type="checkbox" name="voluntarioSeleccionado"
+                                            value="Francisco Javier Pérez Martínez">
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button>Asignar Voluntarios a la donacion</button>
+
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Sección de Settings -->
+            <div class="section" id="settings" style="display: none;">
+                <!-- Contenido de la sección de Settings -->
+                <div class="details">
+                    <div class="recentOrders">
+                        <div class="cardHeader">
+                            <h2>Recepciones</h2>
+                            <!-- <a href="#" class="btn">View All</a> -->
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Nombre de organización</td>
+                                    <td>Fecha Adquisición</td>
+                                    <td>Dirección</td>
+                                    <td>Estado</td>
+                                    <td>Acción</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Aldeas Infantiles</td>
+                                    <td>2024-04-18</td>
+                                    <td>AV.olmos</td>
+                                    <td><span class="status delivered">Aceptado</span></td>
+                                    <td>
+                                        <button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalProductos" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Productos</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Categoria</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Frutillas</td>
+                            <td>Frutas</td>
+                            <td>10 unidades</td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td>Leche</td>
+                            <td>Lacteos</td>
+                            <td>5 litros</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        
+    
+    <!-- =========== Scripts =========  -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        // Seleccionar todos los enlaces de navegación
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Seleccionar todas las secciones
+        const sections = document.querySelectorAll('.section');
+
+        // Función para mostrar la sección correspondiente
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Mostrar la sección seleccionada
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.style.display = 'block';
+
+            // Remover la clase 'active' de todos los enlaces
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Agregar la clase 'active' al enlace correspondiente
+            const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+            activeLink.classList.add('active');
+        }
+
+        // Agregar event listeners a los enlaces de navegación
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+                const sectionId = event.currentTarget.dataset.section; // Obtener el ID de la sección
+                showSection(sectionId);
+            });
+        });
+
+        // Mostrar la sección de Dashboard por defecto
+        showSection('dashboard');
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtener el modal
+            var modal = document.getElementById("modalVoluntarios");
+
+            // Obtener todos los botones que deberían abrir el modal
+            var btns = document.querySelectorAll(".icon-btn");
+
+            // Obtener el elemento <span> que cierra el modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // Asignar evento clic a cada botón
+            btns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    if (this.querySelector(".fa-user-plus")) {
+                        modal.style.display = "block";
+                    }
+                });
+            });
+
+            // Cuando el usuario hace clic en <span> (x), cerrar el modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // Cuando el usuario hace clic en cualquier lugar fuera del modal, cerrarlo
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+
+    </script>
+    <!-- Custom JavaScript for button functionality -->
+    <script>
+        const iconButtons = document.querySelectorAll('.icon-btn');
+
+        iconButtons.forEach(btn => {
+            btn.addEventListener('click', handleIconButtonClick);
+        });
+
+        function handleIconButtonClick(event) {
+            const button = event.currentTarget;
+            const row = button.parentNode.parentNode;
+            const cells = row.querySelectorAll('td');
+            const statusCell = cells[cells.length - 2]; // Última celda menos una (penúltima)
+            const actionCell = cells[cells.length - 1]; // Última celda
+
+            if (button.querySelector('i.fa-check-circle') || button.querySelector('i.fa-check')) {
+                statusCell.innerHTML = '<span class="status delivered">Aceptado</span>';
+                actionCell.innerHTML = '<button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>';
+            } else if (button.querySelector('i.fa-times-circle')) {
+                statusCell.innerHTML = '<span class="status return">Rechazado</span>';
+                actionCell.innerHTML = '<button class="icon-btn"><i class="fa fa-eye" aria-hidden="true"></i></button>';
+            }
+        }
+    </script>
+    <script>
+        // Obtener todos los botones con la clase 'icon-btn' y el icono 'fa-eye'
+        const iconButtonsEye = document.querySelectorAll('.icon-btn i.fa-eye');
+
+        // Obtener el modal y el botón para cerrarlo
+        const modal = document.getElementById('modalProductos');
+        const closeBtn = modal.querySelector('.close');
+
+        // Asignar evento clic a los botones con el icono 'fa-eye'
+        iconButtonsEye.forEach(btn => {
+            btn.parentElement.addEventListener('click', () => {
+                modal.style.display = 'block';
+            });
+        });
+
+        // Cerrar el modal cuando se haga clic en la 'x'
+        closeBtn.onclick = function () {
+            modal.style.display = 'none';
+        }
+
+        // Cerrar el modal cuando se haga clic fuera de él
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+    </div>
+</body>
+
+</html>
