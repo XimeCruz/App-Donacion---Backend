@@ -32,6 +32,9 @@ public class ProductoStockService {
     @Autowired
     private CategoriaService categoriaServices;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     public ProductoStock getById(Long id) {
 
         return productoStockRepository
@@ -44,9 +47,9 @@ public class ProductoStockService {
         return productoStockRepository.findAll();
     }
 
-    public void guardarProducto(ProductoStock productoStock, Authentication authentication) {
+    public void guardarProducto(ProductoStock productoStock) {
 
-        Usuario donante=vendedorServices.GetbyEmail(authentication.getName());
+        Usuario donante=vendedorServices.GetbyEmail("Admin@gmail.com");
         productoStock.setFechaDePublicacion(java.sql.Date.valueOf(LocalDate.now()));
         productoStock.setDonante(donante);
         productoStockRepository.save(productoStock);
@@ -72,23 +75,12 @@ public class ProductoStockService {
 
         productoStockActualizar.setNombre(productoStock.getNombre());
         productoStockActualizar.setUnidadesDisponibles(productoStock.getUnidadesDisponibles());
-        productoStockActualizar.setPrecio(productoStock.getPrecio());
         productoStockActualizar.setDescripcion(productoStock.getDescripcion());
 
 
         productoStockActualizar.setCategoria(categoria);
 
         productoStockRepository.save(productoStockActualizar);
-    }
-
-    public List<ProductoStock> deMenorAMayorPrecio() {
-
-        return productoStockRepository.findAll(Sort.by(Sort.Direction.ASC,"precio"));
-    }
-
-    public List<ProductoStock> deMayorAMenorPrecio() {
-
-        return productoStockRepository.findAll(Sort.by(Sort.Direction.DESC,"precio"));
     }
 
 
@@ -100,10 +92,6 @@ public class ProductoStockService {
     }
 
 
-    public List<ProductoStock> porRangoDePrecios(Double min, Double Max) {
-
-        return productoStockRepository.findByPrecioBetween(min, Max);
-    }
 
 
     public Page<ProductoStock> getProductos(Pageable pageable) {
@@ -123,22 +111,6 @@ public class ProductoStockService {
         return productoStockRepository.findAll(Sort.by(Sort.Direction.DESC, "unidadesDisponibles"));
     }
 
-    public List<ProductoStock> porPrecioMenorA(Double precio) {
-
-        return productoStockRepository.findAll()
-                .stream()
-                .filter(P -> P.getPrecio()<=precio)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-
-    public List<ProductoStock> porPrecioMayorA(Double precio) {
-
-        return productoStockRepository.findAll()
-                .stream()
-                .filter(P -> P.getPrecio()>=precio)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
 
     public List<ProductoStock> findByFechaVencBetween(Date fechaActual, Date fechaProximaSemana){
         return productoStockRepository.findByFechaDeVencimientoBetween(fechaActual,fechaProximaSemana);
@@ -149,6 +121,10 @@ public class ProductoStockService {
         ProductoStock producto = productoStockRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
         producto.setConfirmado(true);
         productoStockRepository.save(producto);
+    }
+
+    public List<ProductoStock> findByDonante(Integer id){
+        return productoStockRepository.findByDonante(usuarioService.obtenerUsuarioPorId(Long.valueOf(id)));
     }
 
 }

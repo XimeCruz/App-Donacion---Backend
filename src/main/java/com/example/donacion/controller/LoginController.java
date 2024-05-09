@@ -32,6 +32,12 @@ public class LoginController {
 
 	}
 
+	@GetMapping(value = "/eleccion")
+	public String eleccion() {
+
+        return "elegir_sesion";
+	}
+
 
 
 	@Autowired

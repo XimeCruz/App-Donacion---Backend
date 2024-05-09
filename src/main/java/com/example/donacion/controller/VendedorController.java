@@ -8,12 +8,13 @@ import com.example.donacion.service.ProductoStockService;
 import com.example.donacion.service.VendedorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 
 @Controller
@@ -27,9 +28,11 @@ public class VendedorController {
 	 * @return la pagina con el listado de productoStock asociado al id del vendedor.
 	 */
 	@GetMapping(value ="/misproductos")
-	public String listarProductos(Authentication authentication, Model model ) {
+	public String listarProductos( Model model ) {
 		
-		Usuario usuario=vendedorServices.GetbyEmail(authentication.getName());
+		Usuario usuario=vendedorServices.GetbyEmail("Admin@gmail.com");
+		List<ProductoStock> productoStockList = productoStockServices.findByDonante(Math.toIntExact(usuario.getId()));
+
 		
 		model.addAttribute("productoStocks", usuario.getProductoStocks());
 		
@@ -85,13 +88,13 @@ public class VendedorController {
 	 * @return
 	 */
 	@PostMapping(value ="/producto/agregar")
-	public String agregarProducto(@Valid ProductoStock producto,BindingResult bindingResult,Authentication auth,RedirectAttributes redirectAttributes) {
+	public String agregarProducto(@Valid ProductoStock producto,BindingResult bindingResult,RedirectAttributes redirectAttributes) {
 		
 		if(bindingResult.hasErrors()) {
 			return vistaagregar;
 		}
 		else {
-			productoStockServices.guardarProducto(producto,auth);
+			productoStockServices.guardarProducto(producto);
 			redirectAttributes.addFlashAttribute("msj",msjAgregado);
 			return redirectListado;
 		}
@@ -123,6 +126,17 @@ public class VendedorController {
 		
 	}
 
+
+	@GetMapping( value = "/producto/{id}/informacion")
+	public String informaciondelProductoCarrito(@PathVariable("id")Long id,Model model) {
+		//Integer idr= 10;
+		ProductoStock productoStock=productoStockServices.getById(id);
+		model.addAttribute("productoInfo",productoStock);
+		model.addAttribute("delCarrito", true);
+
+		return "vistascompradores/informacionproducto";
+	}
+
 	
 	
 	/**
@@ -143,8 +157,8 @@ public class VendedorController {
 	private static final String listaProductos="vistasvendedores/misproductos";
 	private static final String vistaactualizar="vistasvendedores/actualizarproducto";
 	private static final String vistaagregar="vistasvendedores/agregarproducto";
-	private static final String eliminar="redirect:/donacions/vendedor/misproductos";
-	private static final String redirectListado="redirect:/donacions/vendedor/misproductos";
+	private static final String eliminar="redirect:/donacion/donante/misproductos";
+	private static final String redirectListado="redirect:/donacion/donante/misproductos";
 	private static final String msjAgregado="Se ha agregado un Nuevo producto al listado";
 	private static final String msjActualizado="Se ha actualizado un producto del listado ";
 	private static final String msjEliminado="Se ha eliminado un producto de la tienda ";

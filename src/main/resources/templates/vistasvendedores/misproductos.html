@@ -19,7 +19,7 @@
             </div>
          
           <div class="card-body">
-            <a th:href="@{/donacion/vendedor/producto/nuevo}"><button type="button" class="btn btn-outline-primary">Nuevo producto</button></a>
+            <a th:href="@{/donacion/donante/producto/nuevo}"><button type="button" class="btn btn-outline-primary">Nuevo producto</button></a>
             <hr>
         
             <div  th:if="${msj!=null}" class="alert alert-success alert-dismissible fade show" role="alert" >
@@ -40,7 +40,6 @@
                     <th nowrap="nowrap"  scope="col">Id del producto</th>
                     <th nowrap="nowrap"  scope="col">Nombre</th>
                     <th nowrap="nowrap"  scope="col">Categoria</th>
-                    <th nowrap="nowrap"  scope="col">Precio</th>
                     <th nowrap="nowrap"  scope="col">Unidades disponibles</th>
                      <th nowrap="nowrap"  scope="col">Fecha. publicación</th>
                     <th nowrap="nowrap"  scope="col" colspan="3" id="operaciones" >Operaciones</th>
@@ -51,17 +50,16 @@
                     <td th:text="${producto.id}"></td>
                     <td th:text="${producto.nombre}"></td>
                     <td th:text="${producto.categoria.nombre}"></td>
-                    <td th:text="${producto.precio}"></td>
                     <td th:text="${producto.unidadesDisponibles}"></td>
                     <td th:text="${producto.fechaDePublicacion}"></td>
                     <td >
-                      <a th:href="@{/donacion/producto/{id}/informacion (id=${producto.id})}"><button type="button" class="btn btn-outline-warning">Información</button></a>
+                      <a th:href="@{/donacion/donante/producto/{id}/informacion (id=${producto.id})}"><button type="button" class="btn btn-outline-warning">Información</button></a>
                     </td>
                     <td >
-                      <a th:href="@{/donacion/vendedor/producto/eliminar/{id} (id=${producto.id})}"><button type="button" class="btn btn-outline-danger  confirmar" >Eliminar</button></a>
+                      <a th:href="@{/donacion/donante/producto/eliminar/{id} (id=${producto.id})}"><button type="button" class="btn btn-outline-danger  confirmar" >Eliminar</button></a>
                     </td>
                     <td >
-                      <a th:href="@{/donacion/vendedor/producto/actualizar/{id}(id=${producto.id})}"><button type="button" class="btn btn-outline-success">Actualizar</button></a>
+                      <a th:href="@{/donacion/donante/producto/actualizar/{id}(id=${producto.id})}"><button type="button" class="btn btn-outline-success">Actualizar</button></a>
                     </td>
                   </tr>
                 </tbody>

@@ -39,11 +39,6 @@ public class ProductoStock {
 	@JoinColumn(name = "IdCategoria")
 	private Categoria categoria;
 	
-	@Column(name = "precio")
-	@NotNull(message = "Falta rellenar el campo precio")
-	private Double  precio;
-	
-	
 	
 	@Column(name = "cantidadDisponible")
 	@Min(value = 1,message = "la cantidad de unidades disponibles debe ser por lo menos 1 " )

@@ -39,9 +39,7 @@
                   </a>
                 </li>
 
-                <li class="nav-item" sec:Authorize="hasAnyAuthority('Vendedor')">
-                  <a class="nav-link" th:href="@{/donacion/vendedor/misproductos}">Mis productos</a>
-                </li>
+
 
                 <li class="nav-item">
                   <a class="nav-link" th:href="@{/donacion/donacion}">Seguimiento de donaciones</a>
@@ -60,7 +58,7 @@
                     Mas acciones
                   </a>
                   <ul  class="dropdown-menu dropdown-menu-dark">
-                    <li sec:Authorize="hasAnyAuthority('Vendedor')"><a class="dropdown-item" th:href="@{/donacion/vendedor/producto/nuevo}">Publicar nuevo producto</a></li>
+                    <li><a class="dropdown-item" th:href="@{/donacion/donante/producto/nuevo}">Publicar nuevo producto</a></li>
                     <li><a class="dropdown-item" href="#">Información de la cuenta</a></li>
                     <li><a class="dropdown-item" href="#">Preguntas frecuentes</a></li>
                     <li><a class="dropdown-item" href="#">Clientes</a></li>

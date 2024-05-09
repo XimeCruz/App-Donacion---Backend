@@ -17,6 +17,22 @@
             <h1>Lista de notificaciones</h1>
             <ul>
                 <li th:each="notificacion : ${notificaciones}" th:text="${notificacion.mensaje}"></li>
+                <div>
+                    <h1>¿Deseas aceptar esta donacion ?</h1>
+                    <ul>
+                        <li>Espinaca</li>
+                        <li>Zanahoria</li>
+                        <li>Pepino</li>
+                    </ul>
+                    <!-- Formulario para aceptar -->
+                    <form action="/aceptar" method="post">
+                        <button type="submit">Aceptar</button>
+                    </form>
+                    <!-- Formulario para rechazar -->
+                    <form action="/rechazar" method="post">
+                        <button type="submit">Rechazar</button>
+                    </form>
+                </div>
             </ul>
 
         </div>

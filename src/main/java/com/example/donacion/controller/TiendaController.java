@@ -40,19 +40,7 @@ public class TiendaController {
 	public String productosPorRangoDePrecio(@RequestParam(name = "desde",required =false) Double minimo,@RequestParam(name = "hasta",required =false)Double maximo,Model model) {
 		
 		List<ProductoStock> productos=null;
-		
-		if(minimo!=null&& maximo!=null) {
-			productos=productoStockServices.porRangoDePrecios(minimo, maximo);
-		}
-		
-		else if (minimo==null&&maximo!=null) {
-			productos=productoStockServices.porPrecioMenorA(maximo);
-		}
-		else if (maximo==null&&minimo!=null) {
-			productos=productoStockServices.porPrecioMayorA(minimo);
-		}
 
-		
 		
 		model.addAttribute("productos", productos);
 		return vistaprincipal;
@@ -75,13 +63,6 @@ public class TiendaController {
 		if(orden.equalsIgnoreCase("fecha_ASC")) {
 			productos=productoStockServices.porFechaDepublicacion();
 			
-		}
-		else if(orden.equalsIgnoreCase("precio_ASC")) {
-			productos=productoStockServices.deMenorAMayorPrecio();
-			
-		}
-		else if(orden.equalsIgnoreCase("precio_DESC")) {
-			productos=productoStockServices.deMayorAMenorPrecio();
 		}
 		else if(orden.equalsIgnoreCase("cantidad_disponible_DESC")) {
 			productos=productoStockServices.porCantidadDisponible();
