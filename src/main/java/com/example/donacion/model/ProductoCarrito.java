@@ -6,6 +6,7 @@ import lombok.*;
 import java.sql.Date;
 
 
+@ToString
 @Entity
 @Table(name = "producto_carrito")
 @Getter

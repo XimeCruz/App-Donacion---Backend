@@ -7,7 +7,6 @@ import com.example.donacion.repository.ProductoCarritoRepository;
 import com.example.donacion.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +14,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ClienteService {
-
-    @Autowired
-    private Usuario beneficiario;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -36,6 +32,7 @@ public class ClienteService {
     }
 
     public List<ProductoCarrito> getProductosBybBeneficiario(Long id) {
+        Usuario beneficiario = new Usuario();
         beneficiario.setId(id);
         return productoCarritoRepository.findByBeneficiario(beneficiario);
     }

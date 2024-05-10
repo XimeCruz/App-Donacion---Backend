@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.Date;
 
+@ToString
 @Getter
 @Setter
 @Builder

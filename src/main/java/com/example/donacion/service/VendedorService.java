@@ -31,4 +31,10 @@ public class VendedorService {
         return usuarioRepository.findByCorreoElectronico(email);
     }
 
+
+    public Usuario obtenerPorId(Long id) {
+        return usuarioRepository.findById(id).orElseGet(null);
+    }
+
+
 }

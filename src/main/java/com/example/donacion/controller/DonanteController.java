@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/donacion/donante")
-public class VendedorController {
+public class DonanteController {
 	
 	/**
 	 * 
@@ -27,11 +27,11 @@ public class VendedorController {
 	 * @param model  contiene los atributos de las vistas.
 	 * @return la pagina con el listado de productoStock asociado al id del vendedor.
 	 */
-	@GetMapping(value ="/misproductos")
-	public String listarProductos( Model model ) {
+	@GetMapping(value ="/misproductos/{id}")
+	public String listarProductos( Model model, @PathVariable("id") Integer id) {
 		
-		Usuario usuario=vendedorServices.GetbyEmail("Admin@gmail.com");
-		List<ProductoStock> productoStockList = productoStockServices.findByDonante(Math.toIntExact(usuario.getId()));
+		Usuario usuario=vendedorServices.obtenerPorId(id.longValue());
+		//List<ProductoStock> productoStockList = productoStockServices.findByDonante(Math.toIntExact(usuario.getId()));
 
 		
 		model.addAttribute("productoStocks", usuario.getProductoStocks());

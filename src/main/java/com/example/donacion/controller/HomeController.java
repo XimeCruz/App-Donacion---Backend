@@ -3,11 +3,9 @@ package com.example.donacion.controller;
 import com.example.donacion.model.Donacion;
 import com.example.donacion.model.Notificacion;
 import com.example.donacion.model.ProductoStock;
+import com.example.donacion.model.Usuario;
 import com.example.donacion.model.response.DonacionResponse;
-import com.example.donacion.service.CategoriaService;
-import com.example.donacion.service.DonacionService;
-import com.example.donacion.service.NotificacionService;
-import com.example.donacion.service.ProductoStockService;
+import com.example.donacion.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,10 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +24,10 @@ public class HomeController {
 
 	@Autowired
 	NotificacionService notificacionService;
+
+	@Autowired
+	UsuarioService usuarioService;
+
 	/**
 	 * devuelve la ubicacion del archivo en el que se encuentra la pagina principal.
 	 * 
@@ -67,25 +66,49 @@ public class HomeController {
 	 * @param model contiene los atributos de las vistas.
 	 * @return la pagina principal.
 	 */
-	@GetMapping(value ="/principal")
-	public String principal(Model model,Pageable page) {
+	@PostMapping(value ="/usuario")
+	public String principal(@RequestParam String username, @RequestParam String password, Model model, Pageable page) {
 
-		Page<ProductoStock> productos =productoStockServices.getProductos(page);
-		model.addAttribute("productos",productos);
+		System.out.println("Usuario: " + username);
+		System.out.println("Contraseña: " + password);
+
+		Usuario usuario = usuarioService.obtnerUsuarioPorNombreUsuario(username);
+
+		Integer id = usuario.getId().intValue();
+
+		switch (usuario.getRol().getNombre()) {
+			case "Donante":
+				return "redirect:/donacion/donante/misproductos/"+id;
+
+			case "Beneficiario":
+				return "redirect:/donacion/albergue/principal/"+id;
+
+			case "Voluntario":
+				return "redirect:/donacion/voluntario/principal/"+id;
+		
+			default:
+				return "redirect:/donacion/principal";
+		}
+		
+
+		
+	}
+
+	@GetMapping(value ="/principal")
+	public String principal(Model model, Pageable page) {
+
+		Page<ProductoStock> productos = productoStockServices.getProductos(page);
+		model.addAttribute("productos", productos);
 		model.addAttribute("ispageable", true);
 
 		Notificacion notification = obtenerNotificacion();
-
-
-
-		if (!(notification == null)) {
+		if (notification != null) {
 			System.out.println(notification);
 			notificacionService.guardarNotificacion(notification);
 			model.addAttribute("notification", notification);
 		} else {
 			model.addAttribute("notification", null);
 		}
-
 
 		return "principal/principal";
 	}

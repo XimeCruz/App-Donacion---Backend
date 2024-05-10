@@ -2,6 +2,7 @@ package com.example.donacion.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @Builder

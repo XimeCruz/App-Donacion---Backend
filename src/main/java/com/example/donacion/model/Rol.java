@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.List;
 
 
+@ToString
 @Entity
 @Table(name = "rol")
 @AllArgsConstructor

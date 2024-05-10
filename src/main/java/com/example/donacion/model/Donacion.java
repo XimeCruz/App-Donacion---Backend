@@ -1,12 +1,14 @@
 package com.example.donacion.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Date;
+import java.util.List;
 
+@ToString
 @Getter
 @Setter
 @Table
@@ -19,10 +21,7 @@ public class Donacion {
     private Date fecha_adquisicion;
     private String hora_adquisicion;
 
-
-    @ManyToOne
-    @JoinColumn(name = "producto_id")
-    private ProductoStock producto;
+    List<ProductoCarrito> productosSeleccion;
 
     @ManyToOne
     @JoinColumn(name = "organizacion_id")

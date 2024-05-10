@@ -15,4 +15,8 @@ public class UsuarioService {
     public Usuario obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
+
+    public Usuario obtnerUsuarioPorNombreUsuario (String nombre){
+        return usuarioRepository.findUsuarioByNombreUsuario(nombre);
+    }
 }

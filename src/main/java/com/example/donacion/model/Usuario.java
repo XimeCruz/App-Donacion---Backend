@@ -12,7 +12,8 @@ import java.time.Period;
 import java.util.List;
 
 
-@Component
+
+@ToString
 @Entity
 @Table(name = "usuarios")
 @Getter

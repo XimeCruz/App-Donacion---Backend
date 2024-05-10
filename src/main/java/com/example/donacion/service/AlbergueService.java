@@ -2,18 +2,13 @@ package com.example.donacion.service;
 
 
 import com.example.donacion.model.Albergue;
-import com.example.donacion.model.Categoria;
-import com.example.donacion.model.ProductoStock;
-import com.example.donacion.model.Usuario;
 import com.example.donacion.repository.AlbergueRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service

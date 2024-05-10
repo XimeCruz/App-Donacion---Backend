@@ -1,16 +1,12 @@
 package com.example.donacion.service;
 
 import com.example.donacion.model.Notificacion;
-import com.example.donacion.model.Producto;
 import com.example.donacion.model.ProductoStock;
 import com.example.donacion.repository.NotificacionRepository;
-import com.example.donacion.repository.ProductoRepository;
-import com.example.donacion.repository.ProductoStockRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 

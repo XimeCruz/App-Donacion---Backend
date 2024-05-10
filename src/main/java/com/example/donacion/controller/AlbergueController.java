@@ -8,7 +8,6 @@ import com.example.donacion.model.ProductoStock;
 import com.example.donacion.model.Usuario;
 import com.example.donacion.model.response.DonacionResponse;
 import com.example.donacion.service.*;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,11 +63,15 @@ public class AlbergueController {
      * @param page información de paginación.
      * @return la pagina principal.
      */
-    @GetMapping(value = "/principal")
-    public String principal(Model model, Pageable page) {
+    @GetMapping(value = "/principal/{id}")
+    public String principal(Model model, Pageable page, @PathVariable("id") Integer id) {
+
+        
+
         Page<ProductoStock> productos = productoStockServices.getProductos(page);
         model.addAttribute("productos", productos);
         model.addAttribute("isPageable", true);
+        model.addAttribute("idUsuario", id);
 
         return "beneficiario/principal";
     }
@@ -126,12 +129,14 @@ public class AlbergueController {
 
 
 
-    @GetMapping( value = "/producto/agregar/{id}")
-	public String vistaAgregarAlCarrito(ProductoCarrito productoCarrito,@PathVariable("id")Long id, Model model) {
+    @GetMapping( value = "{idUsuario}/producto/agregar/{id}")
+	public String vistaAgregarAlCarrito(ProductoCarrito productoCarrito,@PathVariable("id")Long id, @PathVariable("idUsuario") Integer idUser, Model model) {
 		
 		ProductoStock productoStock=productoStockServices.getById(id);
+
 		
 		model.addAttribute("productoAgregar",productoStock);
+        model.addAttribute("idUsuario", idUser);
 		
 		return "beneficiario/agregaralcarrito"; //template
 	}
