@@ -72,4 +72,10 @@ public class ProductoStock {
 	 */
 	@OneToMany(mappedBy = "productoStock",cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
 	private List<ProductoCarrito> posiblescompras;
+
+
+	@ManyToOne
+	@JoinColumn(name = "IdBeneficiario")
+	private Usuario beneficiario;
+
 }

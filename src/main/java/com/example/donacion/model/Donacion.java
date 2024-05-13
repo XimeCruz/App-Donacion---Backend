@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Date;
-import java.util.List;
 
 @ToString
 @Getter
@@ -21,7 +20,9 @@ public class Donacion {
     private Date fecha_adquisicion;
     private String hora_adquisicion;
 
-    List<ProductoCarrito> productosSeleccion;
+    @ManyToOne
+    @JoinColumn(name = "producto_id")
+    private ProductoStock producto;
 
     @ManyToOne
     @JoinColumn(name = "organizacion_id")

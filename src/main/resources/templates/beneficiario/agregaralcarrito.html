@@ -26,7 +26,10 @@
 						<p class="card-text">Fecha de vencimiento : <strong th:text="${productoAgregar.fechaDeVencimiento}"></strong></p>
 						<form   th:action="@{/donacion/albergue/producto/agregar}" th:object="${productoCarrito}" method="post">
 							<input type="hidden" th:name="productoStock.id" th:value="${productoAgregar.id}">
-							
+
+						<input type="hidden" th:name="beneficiario.id" th:value="${idUsuario}">
+
+<!--							<p class="card-text" th:text="${idUsuario}"></p>-->
 							<div class="div-cantidad">
 								<p  >Cantidad: <span></span></p>
 							</div>

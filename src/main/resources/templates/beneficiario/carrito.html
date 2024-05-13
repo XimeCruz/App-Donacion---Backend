@@ -101,7 +101,8 @@
       </div>
 
       <div class="card-body">
-        <a th:href="@{/donacion/albergue/principal}"><button type="button" class="btn btn-outline-primary">Ver mas donaciones</button></a>
+        <a th:href="@{/donacion/albergue/principal/{beneficiarioId}  (beneficiarioId=${beneficiarioId})}"><button type="button" class="btn btn-outline-primary">Ver mas donaciones</button></a>
+
 
 
         <div th:if="${msj !=null }" class="alert alert-success alert-dismissible fade show" id="msj" role="alert">
@@ -138,13 +139,13 @@
             <td th:text="${productoCarrito.productoStock.fechaDeVencimiento}"></td>
             <td th:text="${productoCarrito.cantidadSeleccionada}"></td>
             <td>
-              <a th:href="@{/donacion/albergue/elcarrito/actualizar/{id} (id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-success">Actualizar</button></a>
+              <a th:href="@{/donacion/albergue/elcarrito/{beneficiarioId}/actualizar/{id}   (beneficiarioId=${beneficiarioId}, id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-success">Actualizar</button></a>
             </td>
             <td >
-              <a  th:href="@{/donacion/albergue/elcarrito/{id}/eliminar(id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-danger" >Eliminar</button></a>
+              <a  th:href="@{/donacion/albergue/elcarrito/{beneficiarioId}/eliminar/{id}  (beneficiarioId=${beneficiarioId}, id=${productoCarrito.id})}"><button type="button" class="btn btn-outline-danger" >Eliminar</button></a>
             </td>
             <td >
-              <a th:href="@{/donacion/albergue/producto/{id}/informacion (id=${productoCarrito.productoStock.id})}" ><button type="button" class="btn btn-outline-warning">Informacion</button></a>
+              <a th:href="@{/donacion/albergue/producto/{beneficiarioId}/informacion/{id} (beneficiarioId=${beneficiarioId},id=${productoCarrito.productoStock.id})}" ><button type="button" class="btn btn-outline-warning">Informacion</button></a>
             </td>
           </tr>
           </tbody>
@@ -167,9 +168,25 @@
             <br/>
             <input type="text" placeholder="Dirección localización" id="locationInput" />
           </div>
-          <div class="button-container">
-            <button class="submit-button">Enviar</button>
-          </div>
+          <form th:action="@{/rutaParaEnviarDatos}" method="post">
+            <input type="hidden" name="fecha" id="inputFecha" />
+            <input type="hidden" name="hora" id="inputHora" />
+            <input type="hidden" name="latitud" id="inputLatitud" />
+            <input type="hidden" name="longitud" id="inputLongitud" />
+            <input type="hidden" name="direccion" id="inputDireccion" />
+            <input type="hidden" name="productos" id="inputProductos" />
+
+            <div class="date-time-input">
+              <input type="date" id="fecha" placeholder="Fecha" onchange="document.getElementById('inputFecha').value = this.value" />
+              <input type="time" id="hora" placeholder="Hora" onchange="document.getElementById('inputHora').value = this.value" />
+            </div>
+            <input type="text" placeholder="Dirección localización" id="locationInput" onchange="document.getElementById('inputDireccion').value = this.value" />
+            <div id="map"></div>
+            <div id="info"></div>
+            <div class="button-container">
+              <button type="submit" class="submit-button">Enviar</button>
+            </div>
+          </form>
 
         </div>
         <script>
@@ -197,6 +214,12 @@
           } else {
             alert('Geolocalización no es soportada en este navegador.');
           }
+          map.on('click', function(e) {
+            var latLng = e.lngLat;
+            document.getElementById('inputLatitud').value = latLng.lat;
+            document.getElementById('inputLongitud').value = latLng.lng;
+            document.getElementById('locationInput').value = `Latitud: ${latLng.lat}, Longitud: ${latLng.lng}`;
+          });
         </script>
 
       </div>

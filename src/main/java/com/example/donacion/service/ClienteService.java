@@ -20,6 +20,8 @@ public class ClienteService {
 
     @Autowired
     private ProductoCarritoRepository productoCarritoRepository;
+    @Autowired
+    private UsuarioService usuarioService;
 
 
     public void crearCuenta(Usuario cliente) {
@@ -44,9 +46,12 @@ public class ClienteService {
 
     //public boolean buscarProductoStockEnCarritoCliente(Long id, Authentication authentication) {
 
-    public boolean buscarProductoStockEnCarritoCliente(Long id) {
+    public boolean buscarProductoStockEnCarritoCliente(Long id, Long idBeneficiario) {
+
+        Usuario beneficiario = usuarioService.obtenerUsuarioPorId(idBeneficiario);
+
         return usuarioRepository
-                .findByCorreoElectronico("Admin@gmail.com")
+                .findByCorreoElectronico(beneficiario.getCorreoElectronico())
                 .getProductoCarritos()
                 .stream()
                 .filter(p ->p.getProductoStock()

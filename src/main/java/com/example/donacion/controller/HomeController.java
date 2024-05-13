@@ -74,6 +74,11 @@ public class HomeController {
 
 		Usuario usuario = usuarioService.obtnerUsuarioPorNombreUsuario(username);
 
+		if(usuario == null){
+			model.addAttribute("error", "Usuario no encontrado");
+			return "inicio-registro/inicio";
+		}
+
 		Integer id = usuario.getId().intValue();
 
 		switch (usuario.getRol().getNombre()) {
@@ -89,7 +94,6 @@ public class HomeController {
 			default:
 				return "redirect:/donacion/principal";
 		}
-		
 
 		
 	}

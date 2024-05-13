@@ -18,10 +18,12 @@
 				<div class="card-body" style="display: block;">
 					<form th:action="@{/donacion/albergue/elcarrito/eliminar}" th:object="${productoEliminar}">
 						<input type="hidden" th:field="*{id}" id="">
+						<input type="hidden" th:name="beneficiario.id" th:value="${beneficiarioId}">
 						<div>
 							<img th:src="@{${productoEliminar.productoStock.imagen}}" class="img">
 						</div>
 						<div class="div-info">
+
 							<h5 class="card-title" th:text="${productoEliminar.productoStock.nombre}"></h5>
 							<hr>
 							<p class="card-text" th:text="${productoEliminar.productoStock.descripcion}"></p>

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -43,8 +44,12 @@ public class AlbergueController {
 
 	@Autowired
 	private ProductoCarritoService productoCarritoServices;
+
     @Autowired
     private AlbergueService albergueService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping(value = "/")
     public String getHome() {
@@ -101,14 +106,24 @@ public class AlbergueController {
         return "beneficiario/donaciones"; //templates que terminan con html
     }
 
-    @GetMapping(value = "/producto/{id}/informacion")
-    public String informacionDelProductoCarrito(@PathVariable("id") Long id, Model model) {
+    @GetMapping(value = "/producto/{beneficiarioId}/informacion/{id}")
+    public String informacionDelProductoCarrito(@PathVariable("id") Long id, Model model, @PathVariable("beneficiarioId")Long idBen) {
         ProductoStock productoStock = productoStockServices.getById(id);
         model.addAttribute("productoInfo", productoStock);
         model.addAttribute("delCarrito", true);
+        model.addAttribute("beneficiarioId", idBen);
 
         return "beneficiario/informacionproducto";
     }
+
+    @PostMapping("/redirectCarrito")
+    public String handleCarritoRedirect(@RequestParam("beneficiarioId") Long beneficiarioId, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("beneficiarioId", beneficiarioId);
+        return "redirect:/donacion/albergue/elcarrito";
+    }
+
+
+
     
     @ModelAttribute
     public void atributes(Model model) {
@@ -142,25 +157,34 @@ public class AlbergueController {
 	}
 
     @PostMapping(value = "/producto/agregar")
-	public String AgregarProductoAlCarrito(ProductoCarrito productoCarrito,BindingResult bindingResult,RedirectAttributes redirectAttributes) {
-		
-		
+	public String AgregarProductoAlCarrito(ProductoCarrito productoCarrito,
+                                           BindingResult bindingResult,
+                                           RedirectAttributes redirectAttributes) {
+        Usuario beneficiario = usuarioService.obtenerUsuarioPorId(productoCarrito.getBeneficiario().getId());
+
 		if(bindingResult.hasErrors()) {
 			return "beneficiario/agregaralcarrito";
 		}
 		
 		else {
 			//if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId(), auth)) {
-			if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId())) {
+			if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId(),beneficiario.getId())) {
 				redirectAttributes.addFlashAttribute("msjIntentoDeAgregado", "El producto ya se encuentra agregado a la canasta de donacion");
 			}
 			else {
 				//productoCarritoServices.guardarProducto(productoCarrito, auth);
-				Usuario cliente=clienteServices.GetbyEmail("Admin@gmail.com");
-				productoCarrito.setBeneficiario(cliente);
+				//Usuario cliente=clienteServices.GetbyEmail("Admin@gmail.com");
+
+                //System.out.println(productoCarrito.getBeneficiario().getId());
+				productoCarrito.setBeneficiario(beneficiario);
 				productoCarritoServices.guardarProducto(productoCarrito);
 				redirectAttributes.addFlashAttribute("msj", "Se ha agregado un nuevo producto a la canasta de donacion");
+
+
 			}
+
+            // Agregar el id del beneficiario a los redirectAttributes
+                redirectAttributes.addFlashAttribute("beneficiarioId", beneficiario.getId());
 	
 			return  "redirect:/donacion/albergue/elcarrito"; //CONTROLLER //GET POST PUT DELETE
 		}
@@ -168,25 +192,29 @@ public class AlbergueController {
 
     
     @GetMapping( value = "/elcarrito")
-	public String alCarrito(Authentication authentication, Model model) {
-		
+	public String alCarrito(Model model,
+                                @ModelAttribute("beneficiarioId") Integer beneficiarioId) {
+
+        System.out.println(beneficiarioId);
 		//Usuario cliente=clienteServices.GetbyEmail(authentication.getName());
 
-		Usuario cliente=clienteServices.GetbyEmail("Admin@gmail.com");
+		Usuario beneficiario = usuarioService.obtenerUsuarioPorId(beneficiarioId.longValue());
 		
-		List<ProductoCarrito>productosCarrito=cliente.getProductoCarritos();
+		List<ProductoCarrito>productosCarrito=beneficiario.getProductoCarritos();
 		model.addAttribute("ProductosCarrito", productosCarrito);
+        model.addAttribute("beneficiarioId", beneficiarioId);
 		
 		return "beneficiario/carrito";
 	}
 
 
-    @GetMapping( value = "/elcarrito/actualizar/{id}")
-	public String vistaActualizar(@PathVariable("id")Long id, Model model) {;
+    @GetMapping( value = "/elcarrito/{beneficiarioId}/actualizar/{id}")
+	public String vistaActualizar(@PathVariable("id")Long id, @PathVariable("beneficiarioId")Long idBen, Model model) {;
 
 		ProductoCarrito productoCarrito=productoCarritoServices.getById(id);
 
 		model.addAttribute("productoActualizar", productoCarrito);
+        model.addAttribute("beneficiarioId", idBen);
 
 		return "beneficiario/actualizar";
 	}
@@ -203,20 +231,22 @@ public class AlbergueController {
 			redirectAttributes.addFlashAttribute("msj","Se ha actualizado un producto de la canasta de donacion");
 		}
 
+        System.out.println(productoActualizar.getBeneficiario().getId());
+
+         // Agregar el id del beneficiario a los redirectAttributes
+        redirectAttributes.addFlashAttribute("beneficiarioId", productoActualizar.getBeneficiario().getId());
+
 
 		return "redirect:/donacion/albergue/elcarrito";
-
-
-
 	}
 
 
-    @GetMapping( value = "/elcarrito/{id}/eliminar")
-	public String vistaElimnar(@PathVariable("id")Long id, Model model) {;
+    @GetMapping( value = "/elcarrito/{beneficiarioId}/eliminar/{id}")
+	public String vistaElimnar(@PathVariable("id")Long id, @PathVariable("beneficiarioId")Long idBen, Model model) {;
 
 		ProductoCarrito productoCarrito=productoCarritoServices.getById(id);
 		model.addAttribute("productoEliminar", productoCarrito);
-
+        model.addAttribute("beneficiarioId", idBen);
 
 		return "beneficiario/eliminar";
 	}
@@ -228,6 +258,8 @@ public class AlbergueController {
 
 		productoCarritoServices.eliminarProducto(productoEliminar);
 		redirectAttributes.addFlashAttribute("msjEliminado", "Se ha eliminado un producto de la canasta de donacion");
+
+         redirectAttributes.addFlashAttribute("beneficiarioId", productoEliminar.getBeneficiario().getId());
 
 		return "redirect:/donacion/albergue/elcarrito";
 	}
@@ -269,6 +301,22 @@ public class AlbergueController {
         albergueService.updateAlbergue(albergue);
         model.addAttribute("albergue", albergue);
         return "redirect:/donacion/albergue/editar";
+    }
+
+    @PostMapping("/rutaParaEnviarDatos")
+    public String recibirDatosDeCarrito(
+            @RequestParam("fecha") String fecha,
+            @RequestParam("hora") String hora,
+            @RequestParam("latitud") double latitud,
+            @RequestParam("longitud") double longitud,
+            @RequestParam("direccion") String direccion,
+            @RequestParam("productos") String productosJson, // Suponiendo que los productos vienen en formato JSON
+            RedirectAttributes redirectAttributes) {
+
+        // Aquí puedes convertir el JSON de productos a objetos Java, manejar los datos, etc.
+        // Supongamos que guardas los datos y rediriges a otra página para confirmar.
+
+        return "redirect:/paginaDeConfirmacion";
     }
 
 

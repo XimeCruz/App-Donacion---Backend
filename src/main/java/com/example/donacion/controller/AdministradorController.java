@@ -109,7 +109,7 @@ public class AdministradorController {
 
         else {
             //if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId(), auth)) {
-            if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId())) {
+            if(clienteServices.buscarProductoStockEnCarritoCliente(productoCarrito.getProductoStock().getId(), Long.valueOf(9))) {
                 redirectAttributes.addFlashAttribute("msjIntentoDeAgregado", msjProductoEncontrado);
             }
             else {
