@@ -28,7 +28,7 @@
       margin-right: 10px;
     }
     #map {
-      width: 50%;
+      width: 90%;
       height: 60vh;
       border-radius: 4px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -99,12 +99,18 @@
       <div class="card-header">
         <h2 class="h1">Mi eleccion de donaciones</h2>
       </div>
+      <form th:action="@{/donacion/albergue/solicitar-donacion}" th:object="${donacion}" method="post">
+
+        <!-- hacer aqui toda la logia conchatbot -->
+      <input type="hidden" th:name="beneficiario.id" th:value="${beneficiarioId}">
+
+      <div th:each="productoCarrito, iterStat : ${ProductosCarrito}">
+        <input type="hidden" th:name="'productos[' + ${iterStat.index} + '].id'" th:value="${productoCarrito.id}" />
+        <input type="hidden" th:name="'productos[' + ${iterStat.index} + '].cantidadSeleccionada'" th:value="${productoCarrito.cantidadSeleccionada}" />
+      </div>
 
       <div class="card-body">
         <a th:href="@{/donacion/albergue/principal/{beneficiarioId}  (beneficiarioId=${beneficiarioId})}"><button type="button" class="btn btn-outline-primary">Ver mas donaciones</button></a>
-
-
-
         <div th:if="${msj !=null }" class="alert alert-success alert-dismissible fade show" id="msj" role="alert">
           <h5 id="msj-actualizado" th:text="${msj}"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -154,21 +160,8 @@
 
       </div>
       <div class="card-header">
-        <h2 class="h1">Coordinar entrega</h2>
-        <div class="container">
-          <h2>Horario:</h2>
-          <div class="date-time-input">
-            <input type="date" placeholder="fecha" />
-            <input type="time" placeholder="hora" />
-          </div>
-          <h2>Ubicación de entrega:</h2>
-          <div id="map"></div>
-          <div id="info"></div>
-          <div>
-            <br/>
-            <input type="text" placeholder="Dirección localización" id="locationInput" />
-          </div>
-          <form th:action="@{/rutaParaEnviarDatos}" method="post">
+        
+          
             <input type="hidden" name="fecha" id="inputFecha" />
             <input type="hidden" name="hora" id="inputHora" />
             <input type="hidden" name="latitud" id="inputLatitud" />
@@ -176,19 +169,28 @@
             <input type="hidden" name="direccion" id="inputDireccion" />
             <input type="hidden" name="productos" id="inputProductos" />
 
+            <h2 class="h1">Coordinar entrega</h2>
+            <div class="container">
+            <h2>Horario:</h2>
+
             <div class="date-time-input">
               <input type="date" id="fecha" placeholder="Fecha" onchange="document.getElementById('inputFecha').value = this.value" />
               <input type="time" id="hora" placeholder="Hora" onchange="document.getElementById('inputHora').value = this.value" />
             </div>
-            <input type="text" placeholder="Dirección localización" id="locationInput" onchange="document.getElementById('inputDireccion').value = this.value" />
+            
+            <h2>Ubicación de entrega:</h2>
             <div id="map"></div>
             <div id="info"></div>
+
+            <input type="text" placeholder="Dirección localización" id="locationInput" onchange="document.getElementById('inputDireccion').value = this.value" />
+
             <div class="button-container">
               <button type="submit" class="submit-button">Enviar</button>
             </div>
-          </form>
+         
 
         </div>
+      
         <script>
           maptilersdk.config.apiKey = 'r3NiLHgrItLbXSqA7eh4';
           const map = new maptilersdk.Map({
@@ -198,12 +200,7 @@
             zoom: 14,
           });
           var marker = new maptilersdk.Marker().setLngLat([16.62662018, 49.2125578]).addTo(map);
-          map.on('click', function(e) {
-            var latLng = e.lngLat;
-            marker.setLngLat(latLng);
-            document.getElementById('info').textContent = "Ubicación seleccionada: " + latLng.lat + ", " + latLng.lng;
-            document.getElementById('locationInput').value = latLng.lat + ", " + latLng.lng;
-          });
+        
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
               var latLng = [position.coords.longitude, position.coords.latitude];
@@ -214,16 +211,49 @@
           } else {
             alert('Geolocalización no es soportada en este navegador.');
           }
+
           map.on('click', function(e) {
             var latLng = e.lngLat;
+            marker.setLngLat(latLng);
             document.getElementById('inputLatitud').value = latLng.lat;
             document.getElementById('inputLongitud').value = latLng.lng;
-            document.getElementById('locationInput').value = `Latitud: ${latLng.lat}, Longitud: ${latLng.lng}`;
+
+            // geocodificación inversa
+            fetchDireccion(latLng.lat, latLng.lng);
           });
+
+          function fetchDireccion(lat, lng) {
+            // URL del servicio de geocodificación inversa (debes reemplazar esto con la URL correcta y los parámetros adecuados)
+            var url = `https://api.maptiler.com/geocoding/${lng},${lat}.json?key=r3NiLHgrItLbXSqA7eh4`;
+
+            fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                var direccion = data.features[0].place_name; // Ajusta esto según la estructura de la respuesta del API
+                document.getElementById('locationInput').placeholder = direccion;
+                document.getElementById('inputDireccion').value = direccion;
+              })
+              .catch(error => console.error('Error al obtener la dirección:', error));
+          }
+
+
         </script>
+
+  
+        <script th:inline="javascript">
+          /*<![CDATA[*/
+              var productosCarrito = /*[[${ProductosCarrito}]]*/ [];
+              if (productosCarrito.length > 0) {
+                  document.getElementById('inputProductos').value = JSON.stringify(productosCarrito);
+              } else {
+                  console.error('No hay productos en el carrito');
+              }
+          /*]]>*/
+          </script>
 
       </div>
 
+      </form>
     </div>
   </div><!--container-->
 </main>

@@ -8,19 +8,21 @@ import com.example.donacion.model.ProductoStock;
 import com.example.donacion.model.Usuario;
 import com.example.donacion.model.response.DonacionResponse;
 import com.example.donacion.service.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -303,21 +305,58 @@ public class AlbergueController {
         return "redirect:/donacion/albergue/editar";
     }
 
-    @PostMapping("/rutaParaEnviarDatos")
-    public String recibirDatosDeCarrito(
+    // @PostMapping("/rutaParaEnviarDatos")
+    // public String recibirDatosDeCarrito(
+    //         @RequestParam("fecha") String fecha,
+    //         @RequestParam("hora") String hora,
+    //         @RequestParam("latitud") double latitud,
+    //         @RequestParam("longitud") double longitud,
+    //         @RequestParam("direccion") String direccion,
+    //         @RequestParam("productos") String productosJson, // Suponiendo que los productos vienen en formato JSON
+    //         RedirectAttributes redirectAttributes) {
+
+    //     // Aquí puedes convertir el JSON de productos a objetos Java, manejar los datos, etc.
+    //     // Supongamos que guardas los datos y rediriges a otra página para confirmar.
+
+    //     return "redirect:/paginaDeConfirmacion";
+    // }
+
+    @PostMapping("/solicitar-donacion")
+    public String procesarSolicitudDonacion(
             @RequestParam("fecha") String fecha,
             @RequestParam("hora") String hora,
-            @RequestParam("latitud") double latitud,
-            @RequestParam("longitud") double longitud,
+            @RequestParam("latitud") String latitud,
+            @RequestParam("longitud") String longitud,
             @RequestParam("direccion") String direccion,
-            @RequestParam("productos") String productosJson, // Suponiendo que los productos vienen en formato JSON
-            RedirectAttributes redirectAttributes) {
+            @RequestParam("productos") String productosJson,
+            Model model) throws IOException {
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<ProductoCarrito> productos = objectMapper.readValue(productosJson, new TypeReference<List<ProductoCarrito>>() {});
+        
+        // quiero imprimir la lista de productos
+        for (ProductoCarrito producto : productos) {
+            System.out.println(
+                    "Beneficiario : " + producto.getBeneficiario() + " " +
+                            "Producto : " + producto.getProductoStock().getNombre() + " " +
+                            "Cantidad : " + producto.getCantidadSeleccionada() + " " +
+                            "Fecha : " + fecha + " " +
+                            "Hora : " + hora + " " +
+                            "Latitud : " + latitud + " " +
+                            "Longitud : " + longitud + " " +
+                            "Direccion : " + direccion + " " +
+                            "Producto : " + producto.getProductoStock().getNombre() + " " +
+                            "Cantidad : " + producto.getCantidadSeleccionada() + " "
+            );
+        }
 
-        // Aquí puedes convertir el JSON de productos a objetos Java, manejar los datos, etc.
-        // Supongamos que guardas los datos y rediriges a otra página para confirmar.
+        // Aquí puedes procesar los productos como necesites
 
-        return "redirect:/paginaDeConfirmacion";
+        return "hola";
+
+        //return "redirect:/pagina-de-confirmacion";
     }
+
 
 
 }
