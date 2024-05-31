@@ -1,22 +1,23 @@
 package com.example.donacion.controller;
 
-import com.example.donacion.model.Donacion;
-import com.example.donacion.model.Notificacion;
-import com.example.donacion.model.ProductoStock;
-import com.example.donacion.model.Usuario;
+import com.example.donacion.model.*;
 import com.example.donacion.model.response.DonacionResponse;
+import com.example.donacion.repository.DonacionV2Repository;
 import com.example.donacion.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/donacion")
@@ -27,6 +28,8 @@ public class HomeController {
 
 	@Autowired
 	UsuarioService usuarioService;
+    @Autowired
+    private DonacionV2Repository donacionV2Repository;
 
 	/**
 	 * devuelve la ubicacion del archivo en el que se encuentra la pagina principal.
@@ -135,32 +138,59 @@ public class HomeController {
 		return null;
 	}
 
+//	@GetMapping(value ="/donacion")
+//	public String donacion(Model model,Pageable page) {
+//
+//		List<Donacion> donaciones = donacionService.getAllDonacions();
+//		List<DonacionResponse> donacionResponses = new ArrayList<>();
+//        for (Donacion donacion : donaciones) {
+//            DonacionResponse donacionResponse = new DonacionResponse();
+//            donacionResponse.setFechaAdquisicion(String.valueOf(donacion.getFecha_adquisicion()));
+//            donacionResponse.setCantidad(donacion.getCantidad());
+//            donacionResponse.setNombreProducto(donacion.getProducto().getNombre());
+//            donacionResponse.setNombreOrganizacion(donacion.getOrganizacion().getNombre_org());
+//            donacionResponse.setNombreDonante(donacion.getDonante().getNombre());
+//            donacionResponse.setNombreVoluntarioRecojo(donacion.getVoluntarioRecojo().getNombre());
+//            donacionResponses.add(donacionResponse);
+//        }
+//        //return donacionResponses;
+//
+//
+//
+//		//System.out.println(donaciones);
+//		model.addAttribute("donaciones", donacionResponses);
+//		//System.out.println(model);
+//
+//		return "principal/donaciones";
+//	}
+
+
 	@GetMapping(value ="/donacion")
 	public String donacion(Model model,Pageable page) {
 
-		List<Donacion> donaciones = donacionService.getAllDonacions();
-		List<DonacionResponse> donacionResponses = new ArrayList<>();
-        for (Donacion donacion : donaciones) {
-            DonacionResponse donacionResponse = new DonacionResponse();
-            donacionResponse.setFechaAdquisicion(String.valueOf(donacion.getFecha_adquisicion()));
-            donacionResponse.setCantidad(donacion.getCantidad());
-            donacionResponse.setNombreProducto(donacion.getProducto().getNombre());
-            donacionResponse.setNombreOrganizacion(donacion.getOrganizacion().getNombre_org());
-            donacionResponse.setNombreDonante(donacion.getDonante().getNombre());
-            donacionResponse.setNombreVoluntarioRecojo(donacion.getVoluntarioRecojo().getNombre());
-            donacionResponses.add(donacionResponse);
-        }
-        //return donacionResponses;
-
-
-
-		//System.out.println(donaciones);
-		model.addAttribute("donaciones", donacionResponses);
-		//System.out.println(model);
-
-		return "principal/donaciones";
+		List<DonacionV2> donaciones = donacionV2Repository.findAll();
+        model.addAttribute("donaciones", donaciones);
+		return "principal/lista-donacion";
 	}
 
+
+	boolean aceptarDonacionbOL(Long id) {
+        Optional<DonacionV2> optionalDonacion = donacionV2Repository.findById(id);
+        if (optionalDonacion.isPresent()) {
+            DonacionV2 donacion = optionalDonacion.get();
+            donacion.setAceptado(true);
+            donacionV2Repository.save(donacion);
+            return true;
+        }
+        return false;
+    }
+
+	@PostMapping("/aceptarDonacion/{id}")
+    @ResponseBody
+    public ResponseEntity<?> aceptarDonacion(@PathVariable Long id) {
+        boolean success = aceptarDonacionbOL(id);
+        return ResponseEntity.ok(Collections.singletonMap("success", success));
+    }
 	
 	/**
 	 * busca un productoCarrito por id y devuelve una pagina cargada con la informacion del producto.

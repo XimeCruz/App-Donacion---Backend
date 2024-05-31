@@ -239,18 +239,6 @@
 
         </script>
 
-  
-        <script th:inline="javascript">
-          /*<![CDATA[*/
-              var productosCarrito = /*[[${ProductosCarrito}]]*/ [];
-              if (productosCarrito.length > 0) {
-                  document.getElementById('inputProductos').value = JSON.stringify(productosCarrito);
-              } else {
-                  console.error('No hay productos en el carrito');
-              }
-          /*]]>*/
-          </script>
-
       </div>
 
       </form>

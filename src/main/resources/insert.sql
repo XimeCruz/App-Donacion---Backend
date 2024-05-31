@@ -16,6 +16,8 @@ VALUES
     (14, 'Eduardo Ramírez', 'EduRam', 'eduardoram@mail.com', '$2a$10$Bk5H.dThPaaFE4/FzPGFa.V97T7YG0XbC9TnAbz/jK57LkiQeXapK', 1, '3187654321', '1998-08-30', 1);
 
 
+
+
 INSERT INTO public.categoria (id, nombre, descripcion)
 VALUES
     (1, 'vegetales', 'Vegetales frescos y saludables'),
@@ -27,9 +29,10 @@ VALUES
 
 
 
+INSERT INTO public.albergue (id, beneficiario_id, capacidad, direccion, email, imagen, latitud, longitud, nombre, telefono, descripcion)
+VALUES (1, 9, 500, 'Av. Peru', 'albergueesperanza@gmail.com', '/images/a2.jpeg', -16.4920308, -68.1446255, 'Albergue esperanza', '2458963', 'Ubicado en el corazón de la ciudad, el Albergue Refugio Urbano ofrece un oasis de tranquilidad y comodidad en medio del bullicio urbano. Este albergue es el lugar perfecto para viajeros de todas las edades que buscan un alojamiento asequible y céntrico sin comprometer la calidad y la seguridad.');
 
-INSERT INTO public.organizacion (id, area_servicio, nombre_org, tipo_alimento, tipo_org, ubicacion)
-VALUES (1, 'Huerfanos', 'Aldeas Infantiles', 'de tood tipo', 'SIN FINES DE LUCRO', 'AV.olmos');
+
 
 
 
@@ -65,18 +68,29 @@ INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_ve
 INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, cantidad_disponible, id_categoria, id_donante, imagen, confirmado) VALUES (35, 'Shampoo revitalizante para cabello', '2024-04-18', null, 'Shampoo',  60, 6, 10, '/images/shampoo.jpg', true);
 INSERT INTO public.productos_stock (id, descripcion, fecha_publicacion, fecha_vencimiento, nombre, cantidad_disponible, id_categoria, id_donante, imagen, confirmado) VALUES (33, 'Detergente líquido para ropa', '2024-04-18', null, 'Detergente', 80, 6, 10, '/images/detergente.jpg', true);
 
-INSERT INTO public.donacion (id,cantidad, fecha_adquisicion, hora_adquisicion, donante_id, organizacion_id, producto_id, voluntario_id)
+
+
+
+
+
+INSERT INTO public.donacion (id, beneficiario_id, organizacion_id, producto_id, voluntario_id)
 VALUES
-    (1,7, '2024-04-18', '09:30:00', 10, 1, 7, 9),
-    (2,25, '2024-04-18', '10:15:00', 10, 1, 8, 9),
-    (3,77, '2024-04-18', '11:00:00', 10, 1, 9, 9),
-    (4,46, '2024-04-18', '12:30:00', 10, 1, 10, 9),
-    (5,33, '2024-04-18', '14:45:00', 10, 1, 11, 9),
-    (6,14, '2024-04-18', '15:20:00', 10, 1, 12, 9),
-    (7,11, '2024-04-18', '16:10:00', 10, 1, 13, 9),
-    (8,68, '2024-04-18', '17:00:00', 10, 1, 14, 9),
-    (9,50, '2024-04-18', '18:20:00', 10, 1, 15, 9),
-    (10,92, '2024-04-18', '19:45:00', 10, 1, 16, 9);
+    (1, 10, 1, 7, 9),
+    (2, 10, 1, 8, 9),
+    (3, 10, 1, 9, 9),
+    (4, 10, 1, 10, 9),
+    (5, 10, 1, 11, 9),
+    (6, 10, 1, 12, 9),
+    (7, 10, 1, 13, 9),
+    (8, 10, 1, 14, 9),
+    (9, 10, 1, 15, 9),
+    (10, 10, 1, 16, 9);
+
+INSERT INTO public.donacionv2 (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (1, null, null, null, null, null, null, null, null), (3, false, false, false, 1, 9, null, null, null)
+, (4, false, false, false, 1, 9, 9, null, null)
+, (5, false, false, false, 1, 9, null, null, null)
+, (2, true, true, false, 1, 9, 9, true, true),
+  (6, false, false, false, 1, 9, null, null, null);
 
 
 INSERT INTO public.albergue (id, beneficiario_id, capacidad, direccion, email, imagen, latitud, longitud, nombre, telefono, descripcion) VALUES (1, 11, 500, 'Av. Peru', 'albergueesperanza@gmail.com', '/images/a2.jpeg', -16.4920308, -68.1446255, 'Albergue esperanza', '2458963', 'Ubicado en el corazón de la ciudad, el Albergue Refugio Urbano ofrece un oasis de tranquilidad y comodidad en medio del bullicio urbano. Este albergue es el lugar perfecto para viajeros de todas las edades que buscan un alojamiento asequible y céntrico sin comprometer la calidad y la seguridad.');
@@ -99,3 +113,18 @@ INSERT INTO public.albergue (id, beneficiario_id, capacidad, direccion, email, i
 INSERT INTO public.actividad (id, cantidad, fecha, nombre_producto) VALUES (1, 4, '2024-04-30 02:04:10.000000', 'Espinaca');
 INSERT INTO public.actividad (id, cantidad, fecha, nombre_producto) VALUES (2, 5, '2024-04-30 02:04:13.000000', 'Zanahoria');
 INSERT INTO public.actividad (id, cantidad, fecha, nombre_producto) VALUES (3, 6, '2024-04-30 02:04:16.000000', 'Pepino');
+
+
+INSERT INTO public.donacionv2 (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (1, null, null, null, null, null, null, null, null), (3, false, false, false, 1, 9, null, null, null)
+, (4, false, false, false, 1, 9, null, null, null)
+, (5, false, false, false, 1, 9, null, null, null)
+, (2, true, true, false, 1, 9, 9, true, true),
+  (6, false, false, false, 1, 9, null, null, null);
+-- INSERT INTO public.donacion (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (7, false, false, false, 1, 9, null, null, null);
+-- INSERT INTO public.donacion (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (8, false, false, false, null, 11, null, null, null);
+-- INSERT INTO public.donacion (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (9, false, false, false, null, 11, null, null, null);
+-- INSERT INTO public.donacion (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (10, false, false, false, 1, 11, null, null, null);
+-- INSERT INTO public.donacion (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (11, false, false, false, 1, 11, null, null, null);
+-- INSERT INTO public.donacion (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (12, false, false, false, 1, 11, null, null, null);
+-- INSERT INTO public.donacion (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (13, false, false, false, 1, 11, null, null, null);
+-- INSERT INTO public.donacion (id, aceptado, asignado, recojo, albergue_id, beneficiario_id, voluntario_id, entregado, recibido) VALUES (14, false, false, false, 1, 11, null, null, null);
